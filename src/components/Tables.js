@@ -1,5 +1,3 @@
-
-import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp, faArrowDown, faArrowUp, faEdit, faEllipsisH, faExternalLinkAlt, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Nav, Card, Image, Button, Table, Dropdown, ProgressBar, Pagination, ButtonGroup } from '@themesberg/react-bootstrap';
@@ -9,6 +7,9 @@ import { Routes } from "../routes";
 import { pageVisits, pageTraffic, pageRanking } from "../data/tables";
 import transactions from "../data/transactions";
 import commands from "../data/commands";
+import { Badge } from '@themesberg/react-bootstrap';
+import React ,{useState, useEffect, Fragment} from 'react'
+import axios from 'axios';
 
 const ValueChange = ({ value, suffix }) => {
   const valueIcon = value < 0 ? faAngleDown : faAngleUp;
@@ -72,36 +73,47 @@ export const PageVisitsTable = () => {
   );
 };
 
+
+
 export const PageTrafficTable = () => {
+  
   const TableRow = (props) => {
+    const [ state, setState ] = useState([])
+  const [ quizid, setquizid ] = useState([])
+
+  useEffect(data => {
+    const getFromServer = axios.get('http://localhost:8080/quiz/javafullstack')
+       .then(res => {
+           console.log("RES.DATA LOOKS LIKE THIS:, ", res.data);
+           setState(res.data[0].question);
+           setquizid(res.data[0]._id);
+           console.log(quizid)
+       })
+       .catch (err => console.error("YO YOU GOT AN ERROR IN AXIOS ", err))
+
+},[])
     const { id, source, sourceIcon, sourceIconColor, sourceType, category, rank, trafficShare, change } = props;
 
     return (
-      <tr>
+        state && state.map((item, index)=>(<>
+<tr key={item._id}>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{id}</Card.Link>
+          <Card.Link href="#" className="text-primary fw-bold">{index}</Card.Link>
         </td>
-        <td className="fw-bold">
-          <FontAwesomeIcon icon={sourceIcon} className={`icon icon-xs text-${sourceIconColor} w-30`} />
-          {source}
-        </td>
-        <td>{sourceType}</td>
-        <td>{category ? category : "--"}</td>
-        <td>{rank ? rank : "--"}</td>
+        <td><Link to={'/QuizSubmit/'+index+'/'+quizid+'/'+item._id}><td>{item.title}</td></Link></td>
         <td>
-          <Row className="d-flex align-items-center">
-            <Col xs={12} xl={2} className="px-0">
-              <small className="fw-bold">{trafficShare}%</small>
-            </Col>
-            <Col xs={12} xl={10} className="px-0 px-xl-1">
-              <ProgressBar variant="primary" className="progress-lg mb-0" now={trafficShare} min={0} max={100} />
-            </Col>
-          </Row>
+        <Badge bg="warning" text="dark" className="me-1">Medium</Badge>
         </td>
         <td>
-          <ValueChange value={change} suffix="%" />
+        <Button as={Link} to={'/QuizSubmit/'+index} variant="secondary" className="m-1">Solve now</Button>
         </td>
       </tr>
+
+      
+      </>    ))
+      
+      
+      
     );
   };
 
@@ -112,12 +124,12 @@ export const PageTrafficTable = () => {
           <thead className="thead-light">
             <tr>
               <th className="border-0">#</th>
-              <th className="border-0">Traffic Source</th>
-              <th className="border-0">Source Type</th>
-              <th className="border-0">Category</th>
-              <th className="border-0">Global Rank</th>
+              <th className="border-0">Problems</th>
+              <th className="border-0">Difficulty</th>
+              <th className="border-0"></th>
+              {/* <th className="border-0">Global Rank</th>
               <th className="border-0">Traffic Share</th>
-              <th className="border-0">Change</th>
+              <th className="border-0">Change</th> */}
             </tr>
           </thead>
           <tbody>
