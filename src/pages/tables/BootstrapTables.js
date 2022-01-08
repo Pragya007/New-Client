@@ -18,14 +18,14 @@ export default () => {
             <Breadcrumb.Item active>Java Full Stack</Breadcrumb.Item>
           </Breadcrumb>
           <h4>Java Full Stack </h4>
+          <h6>Instruction</h6>
           <p className="mb-0">
-            Dozens of reusable components built to provide buttons, alerts, popovers, and more.
+            This quiz consists of 10 multiple-choice questions. To be successful with the weekly quizzes, it’s important to thoroughly read chapter 5 in the textbook. It will also be extremely useful to study the key terms at the end of the chapter and review the Test Your Knowledge activity at the end of the chapter. Keep the following in mind:
           </p>
         </div>
       </div>
 
       <PageTrafficTable />
-      <RankingTable />
     </>
   );
 };
