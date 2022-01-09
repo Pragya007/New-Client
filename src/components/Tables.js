@@ -8,7 +8,7 @@ import { pageVisits, pageTraffic, pageRanking } from "../data/tables";
 import transactions from "../data/transactions";
 import commands from "../data/commands";
 import { Badge } from '@themesberg/react-bootstrap';
-import React ,{useState, useEffect, Fragment} from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import axios from 'axios';
 
 const ValueChange = ({ value, suffix }) => {
@@ -73,47 +73,47 @@ export const PageVisitsTable = () => {
   );
 };
 
-
+const Difficulty = (difficulty) => {
+  if (difficulty === "Easy")
+    return <Badge bg="success" text="dark" className="me-1">{difficulty}</Badge>
+  else if (difficulty === "Medium")
+    return <Badge bg="warning" text="dark" className="me-1">{difficulty}</Badge>
+  else
+    return <Badge bg="danger" text="dark" className="me-1">{difficulty}</Badge>
+}
 
 export const PageTrafficTable = () => {
   
   const TableRow = (props) => {
-    const [ state, setState ] = useState([])
-  const [ quizid, setquizid ] = useState([])
+    const [state, setState] = useState([])
+    const [quizid, setquizid] = useState([])
 
-  useEffect(data => {
-    const getFromServer = axios.get('http://localhost:8080/quiz/javafullstack')
-       .then(res => {
-           console.log("RES.DATA LOOKS LIKE THIS:, ", res.data);
-           setState(res.data[0].question);
-           setquizid(res.data[0]._id);
-           console.log(quizid)
-       })
-       .catch (err => console.error("YO YOU GOT AN ERROR IN AXIOS ", err))
+    useEffect(() => {
+      axios.get('http://localhost:8080/quiz/javafullstack')
+        .then(res => {
+          setState(res.data[0].question);
+          setquizid(res.data[0]._id);
+        })
+        .catch(err => console.error(err))
 
-},[])
-    const { id, source, sourceIcon, sourceIconColor, sourceType, category, rank, trafficShare, change } = props;
-
+    }, [])
     return (
-        state && state.map((item, index)=>(<>
-<tr key={item._id}>
-        <td>
-          <Card.Link href="#" className="text-primary fw-bold">{index}</Card.Link>
-        </td>
-        <td><Link to={'/QuizSubmit/'+index+'/'+quizid+'/'+item._id}><td>{item.title}</td></Link></td>
-        <td>
-        <Badge bg="warning" text="dark" className="me-1">Medium</Badge>
-        </td>
-        <td>
-        <Button as={Link} to={'/QuizSubmit/'+index} variant="secondary" className="m-1">Solve now</Button>
-        </td>
-      </tr>
-
-      
-      </>    ))
-      
-      
-      
+      state && state.map((item, index) => (
+        <tr key={item._id}>
+          <td>
+            <Card.Link href="#" className="text-primary fw-bold">{index}</Card.Link>
+          </td>
+          <td><Link to={Routes.QuizQuestion.path + index + '/' + quizid + '/' + item._id}><td>{item.title}</td></Link></td>
+          <td>
+            100
+          </td>
+          <td>
+            {Difficulty(item.difficulty)}
+          </td>
+          <td>
+            <Button as={Link} to={Routes.QuizQuestion.path + index + '/' + quizid + '/' + item._id} variant="secondary" className="m-1">Solve now</Button>
+          </td>
+        </tr>))
     );
   };
 
@@ -125,15 +125,15 @@ export const PageTrafficTable = () => {
             <tr>
               <th className="border-0">#</th>
               <th className="border-0">Problems</th>
+              <th className="border-0">Score</th>
               <th className="border-0">Difficulty</th>
-              <th className="border-0"></th>
               {/* <th className="border-0">Global Rank</th>
               <th className="border-0">Traffic Share</th>
               <th className="border-0">Change</th> */}
             </tr>
           </thead>
           <tbody>
-            {pageTraffic.map(pt => <TableRow key={`page-traffic-${pt.id}`} {...pt} />)}
+            <TableRow/>
           </tbody>
         </Table>
       </Card.Body>
@@ -200,67 +200,54 @@ export const RankingTable = () => {
 };
 
 export const TransactionsTable = () => {
+  
   const totalTransactions = transactions.length;
 
   const TableRow = (props) => {
+    const[posts, setPosts]= useState({blogs:[]})
+useEffect (()=>{
+  const fetchPostList = async () =>{
+    const { data} =await axios("http://localhost:8080/questions" )
+
+    setPosts({blogs:data})
+    console.log(data)
+
+  }
+
+  fetchPostList()
+},[setPosts])
+
     const { invoiceNumber, subscription, price, issueDate, dueDate, status } = props;
     const statusVariant = status === "Paid" ? "success"
       : status === "Due" ? "warning"
         : status === "Canceled" ? "danger" : "primary";
 
     return (
-      <tr>
+
+      
+        posts.blogs && posts.blogs.map((item, index)=>(
+          <tr key={item._id}>
         <td>
-          <Card.Link as={Link} to={Routes.Invoice.path} className="fw-normal">
-            {invoiceNumber}
-          </Card.Link>
+          {index}
         </td>
         <td>
           <span className="fw-normal">
-            {subscription}
-          </span>
-        </td>
-        <td>
-          <span className="fw-normal">
-            {issueDate}
+          <Link to={'/Question/'+item._id}><td>{item.title}</td></Link>
           </span>
         </td>
         <td>
           <span className="fw-normal">
-            {dueDate}
+          <td>{Difficulty(item.difficulty)}</td>
           </span>
         </td>
         <td>
-          <span className="fw-normal">
-            ${parseFloat(price).toFixed(2)}
-          </span>
-        </td>
-        <td>
-          <span className={`fw-normal text-${statusVariant}`}>
-            {status}
-          </span>
-        </td>
-        <td>
-          <Dropdown as={ButtonGroup}>
-            <Dropdown.Toggle as={Button} split variant="link" className="text-dark m-0 p-0">
-              <span className="icon icon-sm">
-                <FontAwesomeIcon icon={faEllipsisH} className="icon-dark" />
-              </span>
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item>
-                <FontAwesomeIcon icon={faEye} className="me-2" /> View Details
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <FontAwesomeIcon icon={faEdit} className="me-2" /> Edit
-              </Dropdown.Item>
-              <Dropdown.Item className="text-danger">
-                <FontAwesomeIcon icon={faTrashAlt} className="me-2" /> Remove
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </td>
+            <Button as={Link} to={'/Question/'+item._id} variant="secondary" className="m-1">Solve now</Button>
+          </td>
       </tr>
+        ))
+      
+
+      
     );
   };
 
@@ -271,38 +258,15 @@ export const TransactionsTable = () => {
           <thead>
             <tr>
               <th className="border-bottom">#</th>
-              <th className="border-bottom">Bill For</th>
-              <th className="border-bottom">Issue Date</th>
-              <th className="border-bottom">Due Date</th>
-              <th className="border-bottom">Total</th>
-              <th className="border-bottom">Status</th>
-              <th className="border-bottom">Action</th>
+              <th className="border-bottom">Problems</th>
+              <th className="border-bottom">Difficulty</th>
+              <th className="border-bottom"></th>
             </tr>
           </thead>
           <tbody>
-            {transactions.map(t => <TableRow key={`transaction-${t.invoiceNumber}`} {...t} />)}
+            <TableRow />
           </tbody>
         </Table>
-        <Card.Footer className="px-3 border-0 d-lg-flex align-items-center justify-content-between">
-          <Nav>
-            <Pagination className="mb-2 mb-lg-0">
-              <Pagination.Prev>
-                Previous
-              </Pagination.Prev>
-              <Pagination.Item active>1</Pagination.Item>
-              <Pagination.Item>2</Pagination.Item>
-              <Pagination.Item>3</Pagination.Item>
-              <Pagination.Item>4</Pagination.Item>
-              <Pagination.Item>5</Pagination.Item>
-              <Pagination.Next>
-                Next
-              </Pagination.Next>
-            </Pagination>
-          </Nav>
-          <small className="fw-bold">
-            Showing <b>{totalTransactions}</b> out of <b>25</b> entries
-          </small>
-        </Card.Footer>
       </Card.Body>
     </Card>
   );

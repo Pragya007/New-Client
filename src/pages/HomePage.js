@@ -48,6 +48,7 @@ import Tables from "./components/Tables";
 import Tabs from "./components/Tabs";
 import Tooltips from "./components/Tooltips";
 import Toasts from "./components/Toasts";
+import { PageTrafficTable } from '../components/Tables';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
@@ -140,8 +141,9 @@ export default () => (
     <RouteWithSidebar exact path={Routes.DocsQuickStart.path} component={DocsQuickStart} />
     <RouteWithSidebar exact path={Routes.DocsLicense.path} component={DocsLicense} />
     <RouteWithSidebar exact path={Routes.DocsFolderStructure.path} component={DocsFolderStructure} />
-    <RouteWithSidebar exact path={Routes.DocsBuild.path} component={DocsBuild} />
-    <RouteWithSidebar exact path={Routes.DocsChangelog.path} component={DocsChangelog} />
+    <RouteWithSidebar exact path={Routes.PageTrafficTable.path} component={PageTrafficTable} />
+    <RouteWithSidebar path={Routes.Question.path} component={DocsBuild} />
+    <RouteWithSidebar path={Routes.QuizQuestion.path} component={DocsChangelog} />
 
     <Redirect to={Routes.NotFound.path} />
   </Switch>

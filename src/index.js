@@ -29,9 +29,11 @@ import ScrollToTop from "./components/ScrollToTop";
 import Login from './pages/examples/Signin'
 
 ReactDOM.render(
+  <React.StrictMode>
   <HashRouter>
+
     <ScrollToTop />
     <HomePage/>
-  </HashRouter>,
+  </HashRouter></React.StrictMode>,
   document.getElementById("root")
 );
