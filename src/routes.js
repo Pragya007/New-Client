@@ -23,8 +23,8 @@ export const Routes = {
     DocsQuickStart: { path: "/documentation/quick-start" },
     DocsLicense: { path: "/documentation/license" },
     DocsFolderStructure: { path: "/documentation/folder-structure" },
-    DocsBuild: { path: "/documentation/build-tools" },
-    DocsChangelog: { path: "/documentation/changelog" },
+    Question: { path: "/Question" },
+    QuizQuestion: { path: "/Quiz/" },
 
     // components
     Accordions: { path: "/components/accordions" },
@@ -44,5 +44,6 @@ export const Routes = {
     Tabs: { path: "/components/tabs" },
     Tooltips: { path: "/components/tooltips" },
     Toasts: { path: "/components/toasts" },
-    WidgetsComponent: { path: "/components/widgets" }
+    WidgetsComponent: { path: "/components/widgets" },
+    PageTrafficTable: { path: "/components/quiz" }
 };
