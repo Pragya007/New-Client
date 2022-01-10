@@ -101,7 +101,7 @@ export default (props = {}) => {
 
               <NavItem title="Dasboard" link={Routes.DashboardOverview.path} icon={faChartPie} />
               {/* <NavItem external title="Messages" link="https://demo.themesberg.com/volt-pro-react/#/messages" target="_blank" badgeText="Pro" icon={faInbox} /> */}
-              <NavItem title="Problems" icon={faHandHoldingUsd} link={Routes.Transactions.path} />
+              <NavItem title="Challenges" icon={faHandHoldingUsd} link={Routes.Transactions.path} />
               
               {/* <NavItem external title="Calendar" link="https://demo.themesberg.com/volt-pro-react/#/calendar" target="_blank" badgeText="Pro" icon={faCalendarAlt} />
               <NavItem external title="Map" link="https://demo.themesberg.com/volt-pro-react/#/map" target="_blank" badgeText="Pro" icon={faMapPin} /> */}
@@ -109,6 +109,7 @@ export default (props = {}) => {
               <CollapsableNavItem eventKey="tables/" title="Assessments" icon={faTable}>
                 <NavItem title="Java Full Stack" link={Routes.BootstrapTables.path} />
               </CollapsableNavItem>
+              <NavItem title="Build Projects" icon={faCog} link={Routes.DocsLicense.path} />
               <NavItem title="Edit profile" icon={faCog} link={Routes.Settings.path} />
 
               {/* <CollapsableNavItem eventKey="examples/" title="Page Examples" icon={faFileAlt}>

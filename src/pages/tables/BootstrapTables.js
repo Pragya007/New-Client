@@ -11,10 +11,6 @@ import Timer from "./Timer";
 
 
 export default () => {
-  const [startnow, setstartnow] = useState(false);
-  const startNowHandler = () => {
-    setstartnow(true);
-  }
   return (
     <React.StrictMode>
       <div className="d-xl-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
@@ -28,18 +24,16 @@ export default () => {
           <Col xs={8} md={6} lg={3} xl={4}>
           <h4>Java Full Stack </h4>
           </Col>
-          <Col xs={4} md={2} xl={1} className="ps-md-0 text-end">
-          {!startnow?<></>: <Timer/>}
-          </Col>
+        
           </Row>
           <h6>Instruction</h6>
           <p className="mb-0">
-            This quiz consists of 10 multiple-choice questions. To be successful with the weekly quizzes, it’s important to thoroughly read chapter 5 in the textbook. It will also be extremely useful to study the key terms at the end of the chapter and review the Test Your Knowledge activity at the end of the chapter. Keep the following in mind:
+          The objective of this Java Full Stack Assessment the talented and creative minds in competitive programming with some interesting algorithmic problems.The participants will be challenged by Multiple Problem Setters with 4 problems of varying difficulty levels in a duration of 3 hr. 
           </p>
         </div>
       </div>
       
-      {startnow?<PageTrafficTable/> :<Button onClick={startNowHandler} variant="success" className="m-1">Start now</Button>}
+      <Button as={Link} to ={Routes.DocsOverview.path} variant="success" className="m-1">Start now</Button>
     </React.StrictMode>
   );
 };

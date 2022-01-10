@@ -44,8 +44,8 @@ export default () => {
       <Row className="justify-content-md-center">
         <Col xs={12} className="mb-4 d-none d-sm-block">
           <SalesValueWidget
-            title="Sales Value"
-            value="10,567"
+            title="Total Problem Solved"
+            value="130"
             percentage={10.57}
           />
         </Col>
@@ -58,8 +58,8 @@ export default () => {
         </Col>
         <Col xs={12} sm={6} xl={4} className="mb-4">
           <CounterWidget
-            category="Customers"
-            title="345k"
+            category="Open Source Contribution"
+            title="40"
             period="Feb 1 - Apr 1"
             percentage={18.2}
             icon={faChartLine}
@@ -69,8 +69,8 @@ export default () => {
 
         <Col xs={12} sm={6} xl={4} className="mb-4">
           <CounterWidget
-            category="Revenue"
-            title="$43,594"
+            category="Average Assessment Score"
+            title="75%"
             period="Feb 1 - Apr 1"
             percentage={28.4}
             icon={faCashRegister}
@@ -80,7 +80,7 @@ export default () => {
 
         <Col xs={12} sm={6} xl={4} className="mb-4">
           <CircleChartWidget
-            title="Traffic Share"
+            title="Test case efficiency"
             data={trafficShares} />
         </Col>
       </Row>
@@ -108,8 +108,8 @@ export default () => {
               <Row>
                 <Col xs={12} className="mb-4">
                   <BarChartWidget
-                    title="Total orders"
-                    value={452}
+                    title="Total Projects"
+                    value={40}
                     percentage={18.2}
                     data={totalOrders} />
                 </Col>

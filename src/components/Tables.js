@@ -35,7 +35,7 @@ export const PageVisitsTable = () => {
       <tr>
         <th scope="row">{pageName}</th>
         <td>{views}</td>
-        <td>${returnValue}</td>
+        <td>{returnValue}</td>
         <td>
           <FontAwesomeIcon icon={bounceIcon} className={`${bounceTxtColor} me-3`} />
           {Math.abs(bounceRate)}%
@@ -49,7 +49,7 @@ export const PageVisitsTable = () => {
       <Card.Header>
         <Row className="align-items-center">
           <Col>
-            <h5>Page visits</h5>
+            <h5>Assessment Leaderboard</h5>
           </Col>
           <Col className="text-end">
             <Button variant="secondary" size="sm">See all</Button>
@@ -59,10 +59,10 @@ export const PageVisitsTable = () => {
       <Table responsive className="align-items-center table-flush">
         <thead className="thead-light">
           <tr>
-            <th scope="col">Page name</th>
-            <th scope="col">Page Views</th>
-            <th scope="col">Page Value</th>
-            <th scope="col">Bounce rate</th>
+            <th scope="col">Assessment Name</th>
+            <th scope="col">Score</th>
+            <th scope="col">Rank</th>
+            <th scope="col">Rank rate</th>
           </tr>
         </thead>
         <tbody>

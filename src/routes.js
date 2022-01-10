@@ -1,6 +1,8 @@
 
 export const Routes = {
     // pages
+    VM:{path:'/build-projects'},
+    fullstack:{path:'/assessment'},
     Presentation: { path: "/" },
     DashboardOverview: { path: "/dashboard/overview" },
     Transactions: { path: "/transactions" },

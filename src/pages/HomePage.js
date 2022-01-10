@@ -48,6 +48,8 @@ import Tables from "./components/Tables";
 import Tabs from "./components/Tabs";
 import Tooltips from "./components/Tooltips";
 import Toasts from "./components/Toasts";
+import VM from "../components/Vm";
+import fullstack from "./tables/Fullstack";
 import { PageTrafficTable } from '../components/Tables';
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
@@ -101,6 +103,8 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
 
 export default () => (
   <Switch>
+    <RouteWithLoader exact path={Routes.fullstack.path} component={fullstack} />
+     <RouteWithLoader exact path={Routes.VM.path} component={VM} />
     <RouteWithLoader exact path={Routes.Presentation.path} component={Signin} />
     <RouteWithLoader exact path={Routes.Signin.path} component={Signin} />
     <RouteWithLoader exact path={Routes.Signup.path} component={Signup} />

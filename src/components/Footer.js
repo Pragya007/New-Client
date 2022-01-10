@@ -21,7 +21,7 @@ export default (props) => {
 
   return (
     <div>
-      {showSettings ? (
+      {/* {showSettings ? (
         <Card className="theme-settings">
           <Card.Body className="pt-4">
             <Button className="theme-settings-close" variant="close" size="sm" aria-label="Close" onClick={() => { toggleSettings(false) }} />
@@ -59,18 +59,18 @@ export default (props) => {
             <span className="fw-bold h6"><FontAwesomeIcon icon={faCogs} className="me-1 fs-7" /> Settings</span>
           </Card.Body>
         </Card>
-      )}
+      )} */}
       <footer className="footer section py-5">
         <Row>
           <Col xs={12} lg={6} className="mb-4 mb-lg-0">
             <p className="mb-0 text-center text-xl-left">
-              Copyright © 2019-{`${currentYear} `}
-              <Card.Link href="https://themesberg.com" target="_blank" className="text-blue text-decoration-none fw-normal">
-                Themesberg
+              Copyright © 2021-{`${currentYear} `}
+              <Card.Link href="https://www.learnlytica.com/" target="_blank" className="text-blue text-decoration-none fw-normal">
+                Learnlytica
               </Card.Link>
             </p>
           </Col>
-          <Col xs={12} lg={6}>
+          {/* <Col xs={12} lg={6}>
             <ul className="list-inline list-group-flush list-group-borderless text-center text-xl-right mb-0">
               <li className="list-inline-item px-0 px-sm-2">
                 <Card.Link href="https://themesberg.com/about" target="_blank">
@@ -93,7 +93,7 @@ export default (props) => {
                 </Card.Link>
               </li>
             </ul>
-          </Col>
+          </Col> */}
         </Row>
       </footer>
     </div>

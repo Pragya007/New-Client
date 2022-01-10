@@ -54,8 +54,7 @@ export default (props) => {
             <Form className="navbar-search">
               <Form.Group id="topbarSearch">
                 <InputGroup className="input-group-merge search-bar">
-                  <InputGroup.Text><FontAwesomeIcon icon={faSearch} /></InputGroup.Text>
-                  <Form.Control type="text" placeholder="Search" />
+                  
                 </InputGroup>
               </Form.Group>
             </Form>

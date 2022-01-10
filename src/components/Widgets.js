@@ -244,15 +244,15 @@ export const ProgressTrackWidget = () => {
   return (
     <Card border="light" className="shadow-sm">
       <Card.Header className="border-bottom border-light">
-        <h5 className="mb-0">Progress track</h5>
+        <h5 className="mb-0">Skil Progress track</h5>
       </Card.Header>
       <Card.Body>
 
-        <Progress title="Rocket - SaaS Template" color="purple" icon={faBootstrap} percentage={34} />
-        <Progress title="Pixel - Design System" color="danger" icon={faAngular} percentage={60} />
-        <Progress title="Spaces - Listings Template" color="tertiary" icon={faVuejs} percentage={45} />
-        <Progress title="Stellar - Dashboard" color="info" icon={faReact} percentage={35} />
-        <Progress last title="Volt - Dashboard" color="purple" icon={faBootstrap} percentage={34} />
+        <Progress title="Bootstrap" color="purple" icon={faBootstrap} percentage={34} />
+        <Progress title="Angular" color="danger" icon={faAngular} percentage={60} />
+        <Progress title="Vue Js" icon={faVuejs} percentage={45} />
+        <Progress title="React JS" color="info" icon={faReact} percentage={35} />
+        <Progress last title="React Bootstrap" color="purple" icon={faBootstrap} percentage={34} />
       </Card.Body>
     </Card>
   );
@@ -276,7 +276,7 @@ export const RankingWidget = () => {
           <div>
             <h6 className="mb-0"><FontAwesomeIcon icon={faFlagUsa} className="icon icon-xs me-3" />Country Rank</h6>
             <div className="small card-stats">
-              United States <FontAwesomeIcon icon={faAngleUp} className="icon icon-xs text-success ms-2" />
+              India <FontAwesomeIcon icon={faAngleUp} className="icon icon-xs text-success ms-2" />
             </div>
           </div>
           <div>
@@ -287,9 +287,9 @@ export const RankingWidget = () => {
         </div>
         <div className="d-flex align-items-center justify-content-between pt-3">
           <div>
-            <h6 className="mb-0"><FontAwesomeIcon icon={faFolderOpen} className="icon icon-xs me-3" />Category Rank</h6>
+            <h6 className="mb-0"><FontAwesomeIcon icon={faFolderOpen} className="icon icon-xs me-3" />Domain Rank</h6>
             <Card.Link href="#top" className="small card-stats">
-              Travel &gt; Accomodation
+              Developer &gt; Fullstack
             </Card.Link>
           </div>
           <div>
@@ -315,7 +315,7 @@ export const SalesValueWidget = (props) => {
           <h5 className="fw-normal mb-2">
             {title}
           </h5>
-          <h3>${value}</h3>
+          <h3>{value}</h3>
           <small className="fw-bold mt-2">
             <span className="me-2">Yesterday</span>
             <FontAwesomeIcon icon={percentageIcon} className={`${percentageColor} me-1`} />
@@ -373,16 +373,16 @@ export const AcquisitionWidget = () => {
   return (
     <Card border="light" className="shadow-sm">
       <Card.Body>
-        <h5>Acquisition</h5>
-        <p>Tells you where your visitors originated from, such as search engines, social networks or website referrals.</p>
+        <h5>Overall Rating</h5>
+        <p>Tells your rating considering all parameters.</p>
         <div className="d-block">
           <div className="d-flex align-items-center pt-3 me-5">
             <div className="icon icon-shape icon-sm icon-shape-danger rounded me-3">
               <FontAwesomeIcon icon={faChartBar} />
             </div>
             <div className="d-block">
-              <label className="mb-0">Bounce Rate</label>
-              <h4 className="mb-0">33.50%</h4>
+              <label className="mb-0">Developer Capability</label>
+              <h4 className="mb-0">73.50%</h4>
             </div>
           </div>
           <div className="d-flex align-items-center pt-3">
@@ -390,8 +390,8 @@ export const AcquisitionWidget = () => {
               <FontAwesomeIcon icon={faChartArea} />
             </div>
             <div className="d-block">
-              <label className="mb-0">Sessions</label>
-              <h4 className="mb-0">9,567</h4>
+              <label className="mb-0">Learning Hours</label>
+              <h4 className="mb-0">100 Hr</h4>
             </div>
           </div>
         </div>

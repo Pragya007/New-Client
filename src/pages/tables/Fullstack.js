@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
@@ -6,9 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { Routes } from "../../routes";
 import { PageTrafficTable } from "../../components/Tables";
-import Timer from "../tables/Timer";
-
-import {Card, Container } from '@themesberg/react-bootstrap';
+import Timer from "./Timer";
 
 
 export default () => {
@@ -41,4 +40,3 @@ export default () => {
     </React.StrictMode>
   );
 };
-
