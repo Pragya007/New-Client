@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { Breadcrumb, Button, Col, Row } from '@themesberg/react-bootstrap';
@@ -8,9 +8,16 @@ import { Link } from 'react-router-dom';
 import { Routes } from "../../routes";
 import { PageTrafficTable } from "../../components/Tables";
 import Timer from "./Timer";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 
 export default () => {
+  useEffect(() => {
+    sessionStorage.setItem("h", 0);
+    sessionStorage.setItem("m", 0);
+    sessionStorage.setItem("s", 0);
+    
+  }, []);
   return (
     <React.StrictMode>
       <div className="d-xl-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
@@ -25,6 +32,9 @@ export default () => {
           <h4>Java Full Stack </h4>
           </Col>
         
+          <Col xs={4} md={2} xl={1} className="ps-md-0 text-end">
+          
+          </Col>
           </Row>
           <h6>Instruction</h6>
           <p className="mb-0">
@@ -34,6 +44,8 @@ export default () => {
       </div>
       
       <Button as={Link} to ={Routes.DocsOverview.path} variant="success" className="m-1">Start now</Button>
+      
     </React.StrictMode>
+    
   );
 };
