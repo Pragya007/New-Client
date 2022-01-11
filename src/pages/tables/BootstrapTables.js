@@ -6,7 +6,7 @@ import { Breadcrumb, Button, Col, Row } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { Routes } from "../../routes";
-import { PageTrafficTable } from "../../components/Tables";
+import { Leaderboard } from "../../components/Tables";
 import Timer from "./Timer";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -18,6 +18,8 @@ export default () => {
     sessionStorage.setItem("s", 0);
     
   }, []);
+
+
   return (
     <React.StrictMode>
       <div className="d-xl-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
@@ -41,10 +43,15 @@ export default () => {
           The objective of this Java Full Stack Assessment the talented and creative minds in competitive programming with some interesting algorithmic problems.The participants will be challenged by Multiple Problem Setters with 4 problems of varying difficulty levels in a duration of 3 hr. 
           </p>
         </div>
+        
       </div>
-      
       <Button as={Link} to ={Routes.DocsOverview.path} variant="success" className="m-1">Start now</Button>
+      <hr></hr>
       
+    <h4 class="text-center">Live Leaderboard</h4>
+          
+
+      <Leaderboard/>
     </React.StrictMode>
     
   );

@@ -84,23 +84,25 @@ const Difficulty = (difficulty) => {
 }
 
 export const PageTrafficTable = (props) => {
+
+  const [state, setState] = useState([])
+  const [quizid, setquizid] = useState([])
   const setScoreFuncSec=(score, index)=>{
     console.log(score)
   localStorage.setItem("score"+index,score)
   }
+
+  useEffect(() => {
+    axios.get(DevelopmentUrl+'/quiz/javafullstack')
+      .then(res => {
+        setState(res.data[0].question);
+        setquizid(res.data[0]._id);
+      })
+      .catch(err => console.error(err))
+
+  }, [])
+
   const TableRow = (props) => {
-    const [state, setState] = useState([])
-    const [quizid, setquizid] = useState([])
-
-    useEffect(() => {
-      axios.get(DevelopmentUrl+'/quiz/javafullstack')
-        .then(res => {
-          setState(res.data[0].question);
-          setquizid(res.data[0]._id);
-        })
-        .catch(err => console.error(err))
-
-    }, [])
     return (
       state && state.map((item, index) => (
         <tr key={item._id}>
@@ -144,6 +146,84 @@ export const PageTrafficTable = (props) => {
     </Card>
   );
 };
+
+
+
+
+
+export const Leaderboard = () => {
+
+  const [state, setState] = useState([])
+
+  useEffect(() => {
+    axios.get(DevelopmentUrl+'/quizresults/javaleaderboard')
+      .then(res => {
+      console.log(res.data);
+      setState(res.data);
+      })
+      .catch(err => console.error(err))
+
+  },[])
+
+  const TableRow = () => {
+    return (
+      state && state.map((item, index) => (
+        <tr key={index}>
+          <td>
+            <Card.Link href="#" className="text-primary fw-bold">{item[2].Rank}</Card.Link>
+          </td>
+          <td>
+            <Card.Link href="#" className="text-primary fw-bold">{item[0]}</Card.Link>
+          </td>
+          <td>
+            <Card.Link href="#" className="text-primary fw-bold">{item[1].Q1}</Card.Link>
+          </td>
+          <td>
+            <Card.Link href="#" className="text-primary fw-bold">{item[1].Q2}</Card.Link>
+          </td>
+          <td>
+            <Card.Link href="#" className="text-primary fw-bold">{item[1].Q3}</Card.Link>
+          </td>
+          <td>
+            <Card.Link href="#" className="text-primary fw-bold">{item[1].totalScore}</Card.Link>
+          </td>
+        
+        </tr>))
+    );
+  };
+
+  return (
+    <Card border="light" className="shadow-sm mb-4">
+      <Card.Body className="pb-0">
+        <Table responsive className="table-centered table-nowrap rounded mb-0">
+          <thead className="thead-light">
+            <tr>
+              <th className="border-0">Rank</th>
+              <th className="border-0">Name</th>
+              <th className="border-0">Q.1</th>
+              <th className="border-0">Q.2</th>
+              <th className="border-0">Q.3</th>
+              <th className="border-0">Total Score</th>
+              {/* <th className="border-0">Global Rank</th>
+              <th className="border-0">Traffic Share</th>
+              <th className="border-0">Change</th> */}
+            </tr>
+          </thead>
+          <tbody>
+            <TableRow/>
+          </tbody>
+        </Table>
+      </Card.Body>
+    </Card>
+  );
+};
+
+
+
+
+
+
+
 
 export const RankingTable = () => {
   const TableRow = (props) => {
