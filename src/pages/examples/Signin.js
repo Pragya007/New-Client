@@ -5,7 +5,7 @@ import { faAngleLeft, faEnvelope, faUnlockAlt } from "@fortawesome/free-solid-sv
 import { faFacebookF, faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { Col, Row, Form, Card, Button, FormCheck, Container, InputGroup } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import DevelopmentUrl from "../../constant";
 import { Routes } from "../../routes";
 import BgImage from "../../assets/img/illustrations/signin.svg";
 import Axios from 'axios'
@@ -38,7 +38,7 @@ export default () => {
           password: pass
       };
       //console.log(formdata);
-      Axios.post('http://localhost:8080/users/login', formdata).then(
+      Axios.post(DevelopmentUrl+'/users/login', formdata).then(
           res => {
               setloginstatus(res.status);
               console.log(res.status)

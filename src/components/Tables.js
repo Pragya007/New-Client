@@ -10,6 +10,7 @@ import commands from "../data/commands";
 import { Badge } from '@themesberg/react-bootstrap';
 import React, { useState, useEffect, Fragment } from 'react'
 import axios from 'axios';
+import DevelopmentUrl from "../constant";
 
 const ValueChange = ({ value, suffix }) => {
   const valueIcon = value < 0 ? faAngleDown : faAngleUp;
@@ -82,14 +83,17 @@ const Difficulty = (difficulty) => {
     return <Badge bg="danger" text="dark" className="me-1">{difficulty}</Badge>
 }
 
-export const PageTrafficTable = () => {
-  
+export const PageTrafficTable = (props) => {
+  const setScoreFuncSec=(score, index)=>{
+    console.log(score)
+  localStorage.setItem("score"+index,score)
+  }
   const TableRow = (props) => {
     const [state, setState] = useState([])
     const [quizid, setquizid] = useState([])
 
     useEffect(() => {
-      axios.get('http://localhost:8080/quiz/javafullstack')
+      axios.get(DevelopmentUrl+'/quiz/javafullstack')
         .then(res => {
           setState(res.data[0].question);
           setquizid(res.data[0]._id);
@@ -103,15 +107,15 @@ export const PageTrafficTable = () => {
           <td>
             <Card.Link href="#" className="text-primary fw-bold">{index}</Card.Link>
           </td>
-          <td><Link to={Routes.QuizQuestion.path + index + '/' + quizid + '/' + item._id}><td>{item.title}</td></Link></td>
+          <td><Link to={{pathname:Routes.QuizQuestion.path + index + '/' + quizid + '/' + item._id, state:{func: {setScoreFuncSec}, index: index}} }><td>{item.title}</td></Link></td>
           <td>
-            100
+            {!localStorage.getItem("score"+index)?0:localStorage.getItem("score"+index)}
           </td>
           <td>
             {Difficulty(item.difficulty)}
           </td>
           <td>
-            <Button as={Link} to={Routes.QuizQuestion.path + index + '/' + quizid + '/' + item._id} variant="secondary" className="m-1">Solve now</Button>
+            <Button as={Link} to={{pathname:Routes.QuizQuestion.path + index + '/' + quizid + '/' + item._id, state:{func: {setScoreFuncSec}, index: index}}} variant="secondary" className="m-1">Solve now</Button>
           </td>
         </tr>))
     );
@@ -133,7 +137,7 @@ export const PageTrafficTable = () => {
             </tr>
           </thead>
           <tbody>
-            <TableRow/>
+            <TableRow props={props}/>
           </tbody>
         </Table>
       </Card.Body>
@@ -207,7 +211,7 @@ export const TransactionsTable = () => {
     const[posts, setPosts]= useState({blogs:[]})
 useEffect (()=>{
   const fetchPostList = async () =>{
-    const { data} =await axios("http://localhost:8080/questions" )
+    const { data} =await axios(DevelopmentUrl+"/questions" )
 
     setPosts({blogs:data})
     console.log(data)

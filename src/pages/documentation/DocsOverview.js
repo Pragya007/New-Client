@@ -17,57 +17,62 @@ export default () => {
   const [h, seth] = useState(sessionStorage.getItem("h"));
   const [m, setm] = useState(sessionStorage.getItem("m"));
   const [s, sets] = useState(sessionStorage.getItem("s"));
+  const [score, setScore] = useState(0)
   
   
   // useEffect(data => {
-    setTimeout(function () {
+  //   const date = Date.now();
+  // let currentDate = null;
+  // do {
+  //   currentDate = Date.now();
+  //   var hvalue=h
+  //   var mvalue=m
+  //   var svalue=s
+  //   // if(hvalue==1){
+  //   //   sessionStorage.clear()
+  //   //   setsss(true)
+  //   // }
+  //   if(svalue>=60){
+  //     svalue=0
+  //     sessionStorage.setItem("s",svalue)
+  //     sets(svalue)
+  //     mvalue = parseInt(mvalue)+1
+  //     sessionStorage.setItem("m",mvalue)
+     
+  //     setm(mvalue)
+  //   }
+  //   // else{
+  //   //   svalue=parseInt(svalue)+1
+  //   //   sessionStorage.setItem("s", svalue)
+  //   //   sets(svalue)
+  //   // }
+  //   if(mvalue>=60){
+  //     mvalue=0
+  //     sessionStorage.setItem("m",mvalue)
       
-      var hvalue=h
-      var mvalue=m
-      var svalue=s
-      // if(hvalue==1){
-      //   sessionStorage.clear()
-      //   setsss(true)
-      // }
-      if(svalue>=60){
-        svalue=0
-        sessionStorage.setItem("s",svalue)
-        sets(svalue)
-        mvalue = parseInt(mvalue)+1
-        sessionStorage.setItem("m",mvalue)
-       
-        setm(mvalue)
-      }
-      // else{
-      //   svalue=parseInt(svalue)+1
-      //   sessionStorage.setItem("s", svalue)
-      //   sets(svalue)
-      // }
-      if(mvalue>=60){
-        mvalue=0
-        sessionStorage.setItem("m",mvalue)
-        
-        setm(mvalue)
-        hvalue=parseInt(hvalue)+1
-        sessionStorage.setItem("h",hvalue)
-        seth(hvalue)
-        
-      }
-        svalue=parseInt(svalue)+1
-        sessionStorage.setItem("s", svalue)
-        sets(svalue)
+  //     setm(mvalue)
+  //     hvalue=parseInt(hvalue)+1
+  //     sessionStorage.setItem("h",hvalue)
+  //     seth(hvalue)
       
+  //   }
+  //     svalue=parseInt(svalue)+1
+  //     sessionStorage.setItem("s", svalue)
+  //     sets(svalue)
+    
+    
+     
       
-       
-        
-    }
-    , 1000)
+  // // }
+  // } while (currentDate - date < 1000);
+      
+     
+  //   // , 1000)
 
   // }, [h,m,s])
 
+  // const [scores, setScore] = useState(0);
 
-  
-  
   return (
     <>
       <div className="d-xl-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
@@ -83,7 +88,7 @@ export default () => {
           </Col>
           <Col xs={4} md={2} xl={1} className="ps-md-0 text-end">
           {/* <Timer/> */}
-          <div >{h}:{m}:{s}</div>
+          {/* <div >{h}:{m}:{s}</div> */}
           </Col>
           </Row>
           <h6>Instruction</h6>
@@ -94,7 +99,7 @@ export default () => {
         
       </div>
       
-      <PageTrafficTable/></>
+      <PageTrafficTable /></>
       // {sss && <Redirect to={Routes.BootstrapTables.path}/>}
     
   );

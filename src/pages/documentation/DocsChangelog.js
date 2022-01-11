@@ -3,7 +3,7 @@ import React ,{useState, useEffect, setState} from 'react'
 import axios from 'axios';
 import { Row, Col, Card, Container } from '@themesberg/react-bootstrap';
 import Editor from '../../components/Editor';
-
+import DevelopmentUrl from "../../constant";
 
 
 const DocsChangelog = (props) => {
@@ -16,10 +16,12 @@ const DocsChangelog = (props) => {
       const[data,setdata]=useState(quesdesc);
       const[quesid,setquesid]=useState();
       var index = window.location.href.substring(window.location.href.indexOf("Quiz/")+5,window.location.href.indexOf("Quiz/")+6);
-      console.log(index);
-
+      console.log(props.location);
+      const setScoreFunc = (score) => {
+        props.location.state.func.setScoreFuncSec(score,props.location.state.index)
+      }
   useEffect(data => {
-    axios.get('http://localhost:8080/quiz/javafullstack')
+    axios.get(DevelopmentUrl+'/quiz/javafullstack')
        .then(res => {
           //  setState(res.data[0]["question"][index]);
            setquesdesc(res.data[0]["question"][index].description)
@@ -52,7 +54,7 @@ const DocsChangelog = (props) => {
         </Card>
       </Col>
     </Row>
-    <Editor/>
+    <Editor  setScoreFunc={setScoreFunc} />
   </Container>
   );
 }

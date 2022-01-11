@@ -6,6 +6,7 @@ import CodeCompiler from './CodeCompiler'
 import Field from './Field';
 import Output from './Output';
 import { Button } from '@themesberg/react-bootstrap';
+import DevelopmentUrl from "../constant";
 
 
 const plang = [
@@ -53,7 +54,7 @@ const plang = [
 
 let token = localStorage.getItem('token');
 //console.log(token);
-const Editor = (props) => {
+export const Editor = (props) => {
 
 
   const [selectedvalue, setSelectedvalue] = useState("c");
@@ -63,7 +64,7 @@ const Editor = (props) => {
   const url = window.location.href;
   let quizid=url.substring(url.indexOf("Quiz/")+7, url.lastIndexOf("/"));
   let quesid=url.substring(url.lastIndexOf("/")+1);
-  
+  console.log(props)
   var v;
   function handleEditorChange(e) {
     setcode(e);
@@ -90,7 +91,7 @@ function handleChange(e){
   // }
   async function apiGet(){
     
-    const response = await fetch("http://127.0.0.1:8080/compile", {
+    const response = await fetch(DevelopmentUrl+"/compile", {
       method: "POST",
       headers: {
         "Content-Type": "text/plain",
@@ -114,9 +115,9 @@ function handleChange(e){
   console.log(v);
 }
 
-async function apiSubmit(props){
+async function apiSubmit(){
     
-  const response = await fetch("http://127.0.0.1:8080/quizresults", {
+  const response = await fetch(DevelopmentUrl+ "/quizresults", {
     method: "POST",
     headers: {
       "Content-Type": "text/plain",
@@ -139,6 +140,7 @@ async function apiSubmit(props){
 console.log(code);
 v = await(response.json());
 setoutputfunc(v.output);
+props.setScoreFunc(v.score);
 //setSubmitOutputfunc(v.output);
 console.log(v.output)
 console.log(v);
