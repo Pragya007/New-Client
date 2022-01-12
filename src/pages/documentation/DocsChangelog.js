@@ -18,6 +18,7 @@ const DocsChangelog = (props) => {
       var index = window.location.href.substring(window.location.href.indexOf("Quiz/")+5,window.location.href.indexOf("Quiz/")+6);
       console.log(props.location);
       const setScoreFunc = (score) => {
+        if(props.location.state)
         props.location.state.func.setScoreFuncSec(score,props.location.state.index)
       }
   useEffect(data => {
