@@ -1,5 +1,5 @@
 import React ,{useState} from 'react';
-// import './CSS/Editor.css'
+import './CSS/Output.css'
 import 'react-dropdown/style.css';
 import Dropdown from 'react-dropdown';
 import CodeCompiler from './CodeCompiler'
@@ -155,15 +155,8 @@ console.log(v);
   <CodeCompiler  onChange={handleEditorChange}/>
         <Button variant="secondary" className="m-1" onClick={apiGet}>Compile</Button>
         <Button variant="secondary" className="m-1"onClick={apiSubmit}>Submit</Button>
-      {/* <Field id="stdin" className="title-input" placeholder="Inputs (seperated by an ' | ' symbol)" onChange={ handleChange }  
-      /> */}
-     {/* <div style={{display:"flex"}}>
-       
-     
-        
-     </div>
-      </div>
-    </div>*/} 
+      <Field id="stdin" className="title-input" placeholder="Inputs (seperated by an ' | ' symbol)" onChange={ handleChange }  
+      />
     <Output showOutput={output}/> 
 </div>
     )

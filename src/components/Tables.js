@@ -89,7 +89,7 @@ export const PageTrafficTable = (props) => {
   const [quizid, setquizid] = useState([])
   const setScoreFuncSec=(score, index)=>{
     console.log(score)
-  localStorage.setItem("score"+index,score)
+  sessionStorage.setItem("score"+index,score)
   }
 
   useEffect(() => {
@@ -111,7 +111,7 @@ export const PageTrafficTable = (props) => {
           </td>
           <td><Link to={{pathname:Routes.QuizQuestion.path + index + '/' + quizid + '/' + item._id, state:{func: {setScoreFuncSec}, index: index}} }><td>{item.title}</td></Link></td>
           <td>
-            {!localStorage.getItem("score"+index)?0:localStorage.getItem("score"+index)}
+            {!sessionStorage.getItem("score"+index)?0:sessionStorage.getItem("score"+index)}
           </td>
           <td>
             {Difficulty(item.difficulty)}
