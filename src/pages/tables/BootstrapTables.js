@@ -17,7 +17,16 @@ export default () => {
     sessionStorage.setItem("h", 0);
     sessionStorage.setItem("m", 0);
     sessionStorage.setItem("s", 0);
-    
+    // axios.get(DevelopmentUrl + '/attempts/userAttempt/')
+    //   .then(res => {
+    //     setquesdesc(res.data[0]["question"][index].description)
+    //     setquestitle(res.data[0]["question"][index].title)
+    //     setinput(res.data[0]["question"][index].sampleInput)
+    //     setoutput(res.data[0]["question"][index].sampleOutput)
+    //   })
+    //   .catch(err => console.error("Error came: ", err))
+
+  
   }, []);
 
 

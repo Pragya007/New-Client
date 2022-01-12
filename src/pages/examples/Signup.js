@@ -1,4 +1,3 @@
-
 import React, {useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faEnvelope, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
@@ -49,11 +48,30 @@ export default () => {
           console.log(error.data)
       })
   }
-  if(regstatus === 200)
-  {
-      message = <h4>Successfully Registered</h4>
-      return message;
-  };
+
+  function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+      return (
+        <Col xs={12} className="d-flex align-items-center justify-content-center">
+        <div className="mb-4 mb-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+          <div className="text-center text-md-center mb-4 mt-md-0">
+            
+          <h4 class="text-center">Successfully Registered</h4>
+            
+            </div>
+            </div>
+            </Col>
+
+      );
+    }
+    return <h4></h4>;
+  }
+  // if(regstatus === 200)
+  // {
+  //     message = <h4>Successfully Registered</h4>
+  //     return message;
+  // };
   
 
 
@@ -148,6 +166,7 @@ export default () => {
                     </Card.Link>
                   </span>
                 </div>
+                <Greeting isLoggedIn={regstatus} />
               </div>
             </Col>
           </Row>

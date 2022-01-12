@@ -16,48 +16,48 @@ export default () => {
 
 
   let [username, setUsername] = useState('');
-    let [pass, setpass] = useState('');
-    let [loginstatus, setloginstatus] = useState(0);
-    let message = <h5>Not Logged in</h5>;
+  let [pass, setpass] = useState('');
+  let [loginstatus, setloginstatus] = useState(0);
+  let message = <h5>Not Logged in</h5>;
 
-    let onchangeemailhandler = (event) => {
-        setUsername(event.target.value);
-        console.log(username);
-    }
-    let onchangepasswordhandler = (event) => {
-        setpass(event.target.value);
-        console.log(pass);
-    }
+  let onchangeemailhandler = (event) => {
+    setUsername(event.target.value);
+    console.log(username);
+  }
+  let onchangepasswordhandler = (event) => {
+    setpass(event.target.value);
+    console.log(pass);
+  }
 
-    
-    let submithandler = (event) => {
-      event.preventDefault();
-      //console.log("Enter into function");
-      let formdata = {
-          username: username,
-          password: pass
-      };
-      //console.log(formdata);
-      Axios.post(DevelopmentUrl+'/users/login', formdata).then(
-          res => {
-              setloginstatus(res.status);
-              console.log(res.status)
-              let { token } = res.data;
-              localStorage.setItem('token', token);
-          }
-      ).catch(error => {
-          console.log(error.data)
-      })
-      console.log(formdata);
-      console.log(loginstatus);
+
+  let submithandler = (event) => {
+    event.preventDefault();
+    //console.log("Enter into function");
+    let formdata = {
+      username: username,
+      password: pass
+    };
+    //console.log(formdata);
+    Axios.post(DevelopmentUrl + '/users/login', formdata).then(
+      res => {
+        setloginstatus(res.status);
+        let { token } = res.data;
+        console.log(token)
+        localStorage.setItem('token', token);
+      }
+    ).catch(error => {
+      console.log(error.data)
+    })
+    console.log(formdata);
+    console.log(loginstatus);
   }
   if (loginstatus === 200) {
-      //  message = <h2>Successfully Logged in</h2>
-      message = <Switch>
-          <Redirect to={Routes.DashboardOverview.path}/>
-      </Switch>
+    //  message = <h2>Successfully Logged in</h2>
+    message = <Switch>
+      <Redirect to={Routes.DashboardOverview.path} />
+    </Switch>
 
-      return message;
+    return message;
 
   }
   return (
@@ -103,7 +103,7 @@ export default () => {
                       <Card.Link className="small text-end">Lost password?</Card.Link>
                     </div>
                   </Form.Group>
-                  <Button variant="primary" type="submit" className="w-100"  onClick={submithandler} >
+                  <Button variant="primary" type="submit" className="w-100" onClick={submithandler} >
                     Sign in
                   </Button>
                 </Form>
