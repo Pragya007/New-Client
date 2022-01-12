@@ -1,6 +1,6 @@
 
 import React ,{useState, useEffect, setState} from 'react'
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import { Row, Col, Card, Container } from '@themesberg/react-bootstrap';
 import Editor from '../../components/Editor';
 import DevelopmentUrl from "../../constant";
@@ -31,11 +31,11 @@ const DocsChangelog = (props) => {
          var hvalue=h
          var mvalue=m
          var svalue=s
-         if(hvalue==1){
+         if(hvalue==3){
            sessionStorage.clear();
            setsss(true);
          }
-         if(svalue>=5){
+         if(svalue>=60){
            svalue=0
            sessionStorage.setItem("s",svalue)
            sets(svalue)
@@ -44,7 +44,7 @@ const DocsChangelog = (props) => {
           
            setm(mvalue)
          }
-         if(mvalue>=2){
+         if(mvalue>=60){
            mvalue=0
            sessionStorage.setItem("m",mvalue)
            

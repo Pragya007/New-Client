@@ -99,7 +99,7 @@ export default (props = {}) => {
             <Nav className="flex-column pt-3 pt-md-0">
               <NavItem title="Learnlytica" link={Routes.Presentation.path} image={ReactHero} />
 
-              <NavItem title="Dasboard" link={Routes.DashboardOverview.path} icon={faChartPie} />
+              <NavItem title="Dashboard" link={Routes.DashboardOverview.path} icon={faChartPie} />
               {/* <NavItem external title="Messages" link="https://demo.themesberg.com/volt-pro-react/#/messages" target="_blank" badgeText="Pro" icon={faInbox} /> */}
               <NavItem title="Challenges" icon={faHandHoldingUsd} link={Routes.Transactions.path} />
               

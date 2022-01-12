@@ -7,6 +7,8 @@ import { Link, Redirect } from 'react-router-dom';
 import { Routes } from "../../routes";
 import { PageTrafficTable } from "../../components/Tables";
 import Timer from "../tables/Timer";
+import axios from 'axios';
+import DevelopmentUrl from "../.././constant";
 
 import {Card, Container } from '@themesberg/react-bootstrap';
 
@@ -18,18 +20,18 @@ export default () => {
   const [m, setm] = useState(sessionStorage.getItem("m"));
   const [s, sets] = useState(sessionStorage.getItem("s"));
   const [score, setScore] = useState(0)
-  
+  let token = localStorage.getItem('token');
   
   useEffect(data => {
    setTimeout(()=>{
     var hvalue=h
     var mvalue=m
     var svalue=s
-    if(hvalue==1){
+    if(hvalue==3){
       sessionStorage.clear();
       setsss(true);
     }
-    if(svalue>=5){
+    if(svalue>=60){
       svalue=0
       sessionStorage.setItem("s",svalue)
       sets(svalue)
@@ -38,7 +40,7 @@ export default () => {
      
       setm(mvalue)
     }
-    if(mvalue>=2){
+    if(mvalue>=60){
       mvalue=0
       sessionStorage.setItem("m",mvalue)
       
@@ -61,6 +63,25 @@ export default () => {
     , 1000)
 
   }, [h,m,s])
+
+
+  async function submithandler(){
+    
+    const response = await fetch(DevelopmentUrl+'/quizresults/getscore', {
+      method: "GET",
+      headers: {
+        "Content-Type": "text/plain",
+        "Authorization": `bearer ${token}`
+      }
+    // }) .then(response => {
+    //   const c = (response.json())
+    //   console.log(c);
+    //   return response.json();
+    // }).catch(error => alert(error.message));
+  })
+  const v = await(response.json());
+  console.log(v);
+}
 
 
   return (
@@ -91,7 +112,7 @@ export default () => {
       </div>
       
       <PageTrafficTable />
-      <Button as={Link} to ={Routes.BootstrapTables.path} variant="success" className="m-1">Submit test</Button>
+      <Button as={Link} to ={Routes.BootstrapTables.path} variant="success" className="m-1" onClick={submithandler}>Submit test</Button>
       
       
       

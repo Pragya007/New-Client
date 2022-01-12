@@ -1,16 +1,63 @@
 
-import React from "react";
+import React, {useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faEnvelope, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 import { faFacebookF, faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { Col, Row, Form, Card, Button, FormCheck, Container, InputGroup } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import Axios from 'axios';
 import { Routes } from "../../routes";
 import BgImage from "../../assets/img/illustrations/signin.svg";
 
 
 export default () => {
+  const [fullname, setFullName]=useState('');
+  const[email,setemail]=useState('');
+  const[pass,setpass]=useState('');
+  const[regstatus,setregstatus]=useState(0);
+  let message=<h4>Not registered</h4>;
+  
+  
+  const onchangenamehandler =(event)=>
+  {
+      setFullName(event.target.value);
+  }
+  
+  const onchangeemailhandler =(event)=>{
+      setemail(event.target.value);
+  }
+  
+  const onchangepasswordhandler =(event)=>{
+      setpass(event.target.value);
+  }
+  
+  const submitHandler=(event)=>
+  {
+      event.preventDefault();
+      const formdata={
+          // name:usernameReg,
+          username:email,
+          password:pass,
+          name:fullname
+      };
+      Axios.post('http://localhost:8080/users/signup',formdata).then(
+          res=>{
+              setregstatus(res.status);
+              
+          }
+      ).catch(error=>{
+          console.log(error.data)
+      })
+  }
+  if(regstatus === 200)
+  {
+      message = <h4>Successfully Registered</h4>
+      return message;
+  };
+  
+
+
+
   return (
     <main>
       <section className="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
@@ -26,26 +73,39 @@ export default () => {
                 <div className="text-center text-md-center mb-4 mt-md-0">
                   <h3 className="mb-0">Create an account</h3>
                 </div>
-                <Form className="mt-4">
+                <Form className="mt-4" onSubmit={submitHandler}>
+                <Form.Group id="name" className="mb-4">
+                    <Form.Label>Your Name</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Text>
+                        <FontAwesomeIcon icon={faEnvelope} />
+                      </InputGroup.Text>
+                      <Form.Control autoFocus required type="name" placeholder="Sachin Diwakar" onChange={onchangenamehandler}/>
+                    </InputGroup>
+                  </Form.Group>
+
+
                   <Form.Group id="email" className="mb-4">
                     <Form.Label>Your Email</Form.Label>
                     <InputGroup>
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faEnvelope} />
                       </InputGroup.Text>
-                      <Form.Control autoFocus required type="email" placeholder="example@company.com" />
+                      <Form.Control autoFocus required type="email" placeholder="example@company.com" onChange={onchangeemailhandler}/>
                     </InputGroup>
                   </Form.Group>
+
                   <Form.Group id="password" className="mb-4">
                     <Form.Label>Your Password</Form.Label>
                     <InputGroup>
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faUnlockAlt} />
                       </InputGroup.Text>
-                      <Form.Control required type="password" placeholder="Password" />
+                      <Form.Control required type="password" placeholder="Password"  onChange={onchangepasswordhandler} />
                     </InputGroup>
                   </Form.Group>
-                  <Form.Group id="confirmPassword" className="mb-4">
+
+                  {/* <Form.Group id="confirmPassword" className="mb-4">
                     <Form.Label>Confirm Password</Form.Label>
                     <InputGroup>
                       <InputGroup.Text>
@@ -53,7 +113,7 @@ export default () => {
                       </InputGroup.Text>
                       <Form.Control required type="password" placeholder="Confirm Password" />
                     </InputGroup>
-                  </Form.Group>
+                  </Form.Group> */}
                   <FormCheck type="checkbox" className="d-flex mb-4">
                     <FormCheck.Input required id="terms" className="me-2" />
                     <FormCheck.Label htmlFor="terms">
