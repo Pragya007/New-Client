@@ -4,9 +4,11 @@ import axios from 'axios';
 import { Row, Col, Card, Container } from '@themesberg/react-bootstrap';
 import Editor from '../../components/Editor';
 import DevelopmentUrl from "../../constant";
-
+import { Link, Redirect } from 'react-router-dom';
+import { Routes } from "../../routes";
 
 const DocsChangelog = (props) => {
+  const [sss,setsss]=useState(false);
   const[quesdesc, setquesdesc]= useState("");
   const[questitle, setquestitle]= useState("");
   const[input, setinput] = useState();
@@ -21,6 +23,51 @@ const DocsChangelog = (props) => {
         if(props.location.state)
         props.location.state.func.setScoreFuncSec(score,props.location.state.index)
       }
+      const [h, seth] = useState(sessionStorage.getItem("h"));
+  const [m, setm] = useState(sessionStorage.getItem("m"));
+  const [s, sets] = useState(sessionStorage.getItem("s"));
+      useEffect(data => {
+        setTimeout(()=>{
+         var hvalue=h
+         var mvalue=m
+         var svalue=s
+         if(hvalue==1){
+           sessionStorage.clear();
+           setsss(true);
+         }
+         if(svalue>=5){
+           svalue=0
+           sessionStorage.setItem("s",svalue)
+           sets(svalue)
+           mvalue = parseInt(mvalue)+1
+           sessionStorage.setItem("m",mvalue)
+          
+           setm(mvalue)
+         }
+         if(mvalue>=2){
+           mvalue=0
+           sessionStorage.setItem("m",mvalue)
+           
+           setm(mvalue)
+           hvalue=parseInt(hvalue)+1
+           sessionStorage.setItem("h",hvalue)
+           seth(hvalue)
+           
+         }
+           svalue=parseInt(svalue)+1
+           sessionStorage.setItem("s", svalue)
+           sets(svalue)
+         
+         
+          
+           
+       }
+           
+          
+         , 1000)
+     
+       }, [h,m,s])
+     
   useEffect(data => {
     axios.get(DevelopmentUrl+'/quiz/javafullstack')
        .then(res => {
@@ -54,8 +101,10 @@ const DocsChangelog = (props) => {
           </Card.Body>
         </Card>
       </Col>
+      <Col><div >{h}:{m}:{s}</div></Col>
     </Row>
     <Editor  setScoreFunc={setScoreFunc} />
+    {sss && <Redirect to={Routes.BootstrapTables.path}/>}
   </Container>
   );
 }
