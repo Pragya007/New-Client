@@ -2,7 +2,7 @@ import React, {useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { Breadcrumb, Button, Col, Row } from '@themesberg/react-bootstrap';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect,useLocation,useHistory } from 'react-router-dom';
 
 import { Routes } from "../../routes";
 import { PageTrafficTable } from "../../components/Tables";
@@ -14,6 +14,7 @@ import {Card, Container } from '@themesberg/react-bootstrap';
 
 
 export default () => {
+  let history= useHistory();
   const [sss,setsss]=useState(false);
   // const [counter, setcounter] = useState(sessionStorage.getItem("counter"));
   const [h, seth] = useState(sessionStorage.getItem("h"));
@@ -21,6 +22,7 @@ export default () => {
   const [s, sets] = useState(sessionStorage.getItem("s"));
   const [score, setScore] = useState(0)
   let token = localStorage.getItem('token');
+  var  userscore=0;
   
   useEffect(data => {
    setTimeout(()=>{
@@ -79,8 +81,13 @@ export default () => {
     //   return response.json();
     // }).catch(error => alert(error.message));
   })
-  const v = await(response.json());
-  console.log(v);
+ let  v = await(response.json());
+ userscore=v.AvgScore
+ console.log(userscore);
+ history.push({
+  pathname:Routes.BootstrapTables.path,
+  state:{from:userscore}
+})
 }
 
 
@@ -112,9 +119,9 @@ export default () => {
       </div>
       
       <PageTrafficTable />
-      <Button as={Link} to ={Routes.BootstrapTables.path} variant="success" className="m-1" onClick={submithandler}>Submit test</Button>
-      
-      
+      {/* <Button as={Link} to ={{ pathname: Routes.BootstrapTables.path, state: { from: userscore}}}  variant="success" className="m-1" onClick={submithandler}>Submit test</Button>
+       */}
+      <Button type="link" className="m-1" onClick={submithandler}>Final Submit</Button>
       
       </>
   );

@@ -3,32 +3,100 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { Breadcrumb, Button, Col, Row } from '@themesberg/react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link,useLocation, withRouter  } from 'react-router-dom';
 
 import { Routes } from "../../routes";
 import { Leaderboard } from "../../components/Tables";
 import Timer from "./Timer";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import DevelopmentUrl from "../.././constant";
+import axios from 'axios';
 
+function BootstrapTables (props){
 
+  const score=useLocation();
+  // console.log(score.state.from);
+  let token = localStorage.getItem('token');
+  const [attempt, setattempt] = useState(false);
+  const [allowed, setallowed] = useState();
+  const[totalscore, settotalscore]=useState(0);
 
-export default () => {
   useEffect(() => {
     sessionStorage.setItem("h", 0);
     sessionStorage.setItem("m", 0);
     sessionStorage.setItem("s", 0);
-    // axios.get(DevelopmentUrl + '/attempts/userAttempt/')
-    //   .then(res => {
-    //     setquesdesc(res.data[0]["question"][index].description)
-    //     setquestitle(res.data[0]["question"][index].title)
-    //     setinput(res.data[0]["question"][index].sampleInput)
-    //     setoutput(res.data[0]["question"][index].sampleOutput)
-    //   })
-    //   .catch(err => console.error("Error came: ", err))
+   
+    async function submithandler(){
+    
+      const response = await fetch(DevelopmentUrl+'/attempts/userAttempt/61d6a02eb1be8bb03c273efc', {
+        method: "GET",
+        headers: {
+          "Content-Type": "text/plain",
+          "Authorization": `bearer ${token}`
+        }
+      // }) .then(response => {
+      //   const c = (response.json())
+      //   console.log(c);
+      //   return response.json();
+      // }).catch(error => alert(error.message));
+    })
+   let  v = await(response.json());
+   console.log(v)
+   if(v.length!=0)
+   {
+   setallowed(v[0].attemptAllowed);
+   setattempt(v[0].attemptFlag);
+  }
+  if(props.location.state != undefined)
+  {
+    settotalscore(score.state.from);
+    console.log(score.state.from)
+  }
+   
+   
+  
+  
+  }
+  submithandler();
 
   
   }, []);
+ 
 
+  function Finalscore(props) {
+    
+    if (props.attempt) {
+      return (
+        <Button as={Link} to ={Routes.DocsOverview.path} variant="success" className="m-1">Retry now</Button>
+
+      );
+    }
+    else{
+      return (
+        <Button as={Link} to ={Routes.DocsOverview.path} variant="success" className="m-1">Start now</Button>
+
+      );
+    }
+
+  }
+
+
+  function Score(props) {
+    
+    if (props.totalscore) {
+      return (
+        <h4 class="text-center">You Scored: {props.totalscore}</h4>
+
+      );
+    }
+    else{
+      return (
+        <h4></h4>
+
+      );
+    }
+
+  }
 
   return (
     <React.StrictMode>
@@ -55,9 +123,9 @@ export default () => {
         </div>
         
       </div>
-      <Button as={Link} to ={Routes.DocsOverview.path} variant="success" className="m-1">Start now</Button>
+      <Finalscore attempt={attempt} allowed={allowed} />
       <hr></hr>
-      
+      <Score totalscore={totalscore}/>
     <h4 class="text-center">Live Leaderboard</h4>
           
 
@@ -66,3 +134,4 @@ export default () => {
     
   );
 };
+export default BootstrapTables;
