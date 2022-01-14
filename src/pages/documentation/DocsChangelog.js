@@ -17,8 +17,10 @@ const DocsChangelog = (props) => {
   const [h, seth] = useState(sessionStorage.getItem("h"));
   const [m, setm] = useState(sessionStorage.getItem("m"));
   const [s, sets] = useState(sessionStorage.getItem("s"));
+   console.log(props)
 
-  var index = window.location.href.substring(window.location.href.indexOf("Quiz/") + 5, window.location.href.indexOf("Quiz/") + 6);
+   var index = window.location.href.substring(window.location.href.indexOf("Quiz/") + 5, window.location.href.indexOf("Quiz/") + 6);
+  
   const setScoreFunc = (score) => {
     if (props.location.state)
       props.location.state.func.setScoreFuncSec(score, props.location.state.index)
@@ -57,7 +59,7 @@ const DocsChangelog = (props) => {
       sets(svalue)
     }, 1000)
   }, [h, m, s])
-
+// Cause of re rendering please remove [h,m,s]
   useEffect(data => {
     axios.get(DevelopmentUrl + '/quiz/javafullstack')
       .then(res => {
@@ -68,7 +70,7 @@ const DocsChangelog = (props) => {
       })
       .catch(err => console.error("Error came: ", err))
 
-  }, [currentques])
+  }, [])
 
   return (
     <Container className="px-0">

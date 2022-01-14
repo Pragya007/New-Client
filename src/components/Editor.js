@@ -64,7 +64,7 @@ export const Editor = (props) => {
   const url = window.location.href;
   let quizid=url.substring(url.indexOf("Quiz/")+7, url.lastIndexOf("/"));
   let quesid=url.substring(url.lastIndexOf("/")+1);
-  console.log(props)
+
   var v;
   function handleEditorChange(e) {
     setcode(e);

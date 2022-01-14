@@ -30,22 +30,26 @@ export default () => {
   }
 
 
-  let submithandler = (event) => {
+  let submithandler =  (event) => {
     event.preventDefault();
     //console.log("Enter into function");
     let formdata = {
       username: username,
       password: pass
     };
+    console.log(formdata)
     //console.log(formdata);
-    Axios.post(DevelopmentUrl + '/users/login', formdata).then(
-      res => {
-        setloginstatus(res.status);
+     Axios.post(DevelopmentUrl+'/users/login', formdata).then(
+      (res) => {
         let { token } = res.data;
-        console.log(token)
         localStorage.setItem('token', token);
+        setloginstatus(res.status);
+       
+        console.log(token)
+       
       }
     ).catch(error => {
+      console.log("error occured")
       console.log(error.data)
     })
     console.log(formdata);
@@ -77,12 +81,12 @@ export default () => {
                 </div>
                 <Form className="mt-4">
                   <Form.Group id="email" className="mb-4" onChange={onchangeemailhandler}>
-                    <Form.Label>Your Email</Form.Label>
+                    <Form.Label>Username</Form.Label>
                     <InputGroup>
                       <InputGroup.Text>
                         <FontAwesomeIcon icon={faEnvelope} />
                       </InputGroup.Text>
-                      <Form.Control autoFocus required type="email" placeholder="example@company.com" />
+                      <Form.Control autoFocus required type="email" placeholder="example123" />
                     </InputGroup>
                   </Form.Group>
                   <Form.Group>

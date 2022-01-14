@@ -12,6 +12,7 @@ import BgImage from "../../assets/img/illustrations/signin.svg";
 export default () => {
   const [fullname, setFullName]=useState('');
   const[email,setemail]=useState('');
+  const[username,setusername]=useState('');
   const[pass,setpass]=useState('');
   const[regstatus,setregstatus]=useState(0);
   let message=<h4>Not registered</h4>;
@@ -29,15 +30,20 @@ export default () => {
   const onchangepasswordhandler =(event)=>{
       setpass(event.target.value);
   }
+
+  const onchangeusernamehandler =(event)=>{
+    setusername(event.target.value);
+}
   
   const submitHandler=(event)=>
   {
       event.preventDefault();
       const formdata={
           // name:usernameReg,
-          username:email,
+          email:email,
           password:pass,
-          name:fullname
+          name:fullname,
+          username:username
       };
       Axios.post('http://localhost:8080/users/signup',formdata).then(
           res=>{
@@ -99,6 +105,16 @@ export default () => {
                         <FontAwesomeIcon icon={faEnvelope} />
                       </InputGroup.Text>
                       <Form.Control autoFocus required type="name" placeholder="Sachin Diwakar" onChange={onchangenamehandler}/>
+                    </InputGroup>
+                  </Form.Group>
+
+                  <Form.Group id="name" className="mb-4">
+                    <Form.Label>Username</Form.Label>
+                    <InputGroup>
+                      <InputGroup.Text>
+                        <FontAwesomeIcon icon={faEnvelope} />
+                      </InputGroup.Text>
+                      <Form.Control autoFocus required type="name" placeholder="Sachin Diwakar" onChange={onchangeusernamehandler}/>
                     </InputGroup>
                   </Form.Group>
 

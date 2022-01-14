@@ -17,11 +17,14 @@ export default (props) => {
   const areNotificationsRead = notifications.reduce((acc, notif) => acc && notif.read, true);
   let history= useHistory();
   let token =localStorage.getItem('token');
-  var decode =  jwt_decode(token);
-  console.log(decode.username)
+  if(token)
+  { var decode =  jwt_decode(token);
+  console.log(decode.name)}
+ 
   function logout()
   {
     localStorage.clear()
+    sessionStorage.clear()
     history.push('/')
   }
 
@@ -99,7 +102,7 @@ export default (props) => {
                 <div className="media d-flex align-items-center">
                   <Image src={Profile3} className="user-avatar md-avatar rounded-circle" />
                   <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-                    <span className="mb-0 font-small fw-bold">{decode.username}</span>
+                    <span className="mb-0 font-small fw-bold">{decode.name}</span>
                   </div>
                 </div>
               </Dropdown.Toggle>
