@@ -21,6 +21,7 @@ export const Routes = {
 
     // docs
     QuizOverview: { path: "/full-stack/overview" },
+    BuildProject: { path: "/Projects/workspace" },
     Question: { path: "/Question" },
     QuizQuestion: { path: "/Quiz/" },
 
