@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import { Routes } from "../../routes";
 import BgImage from "../../assets/img/illustrations/signin.svg";
+import DevelopmentUrl from "../../constant";
 
 
 export default () => {
@@ -45,7 +46,7 @@ export default () => {
           name:fullname,
           username:username
       };
-      Axios.post('http://localhost:8080/users/signup',formdata).then(
+      Axios.post(DevelopmentUrl+'/users/signup',formdata).then(
           res=>{
               setregstatus(res.status);
               

@@ -9,54 +9,55 @@ import { Button } from '@themesberg/react-bootstrap';
 import DevelopmentUrl from "../constant";
 
 
-const plang = [
-  "c", "c99", "c++", "c++14", "c++17","php", "perl","python2","python3",
-  "ruby",
-   "golang",
-   "scala",
-   "bashshell",
-  "sql",
-  "pascal",
-  "c#",
-   "vb.net",
-  "haskell",
-   "objectivec",
-  "swift",
-  "groovy",
-  "fortran",
-  "lua",
-   "tcl",
-  "hack",
-  "rust",
- "d",
-  "ada",
-  "java",
-  "rlanguage",
- "freebasic",
-
-   "verilog",
-  "cobol",
-  "dart",
-  "yabasic",
-   "clojure",
-   "nodejs",
-  "scheme",
-   "forth",
-  "prolog",
-   "octave",
-   "coffeescript",
-   "icon",
-   "f#",
-"assemblernasm"]
 
 
 
 
-let token = localStorage.getItem('token');
+
+
 //console.log(token);
 export const Editor = (props) => {
+  const plang = [
+    "c", "c99", "c++", "c++14", "c++17","php", "perl","python2","python3",
+    "ruby",
+     "golang",
+     "scala",
+     "bashshell",
+    "sql",
+    "pascal",
+    "c#",
+     "vb.net",
+    "haskell",
+     "objectivec",
+    "swift",
+    "groovy",
+    "fortran",
+    "lua",
+     "tcl",
+    "hack",
+    "rust",
+   "d",
+    "ada",
+    "java",
+    "rlanguage",
+   "freebasic",
+  
+     "verilog",
+    "cobol",
+    "dart",
+    "yabasic",
+     "clojure",
+     "nodejs",
+    "scheme",
+     "forth",
+    "prolog",
+     "octave",
+     "coffeescript",
+     "icon",
+     "f#",
+  "assemblernasm"]
 
-
+  let token = localStorage.getItem('token');
   const [selectedvalue, setSelectedvalue] = useState("c");
   const [inp, setinp] = useState();
   const [code, setcode] = useState();
@@ -145,6 +146,7 @@ props.setScoreFunc(v.score);
 console.log(v.output)
 console.log(v);
 
+
 }
   
     return (
@@ -158,6 +160,7 @@ console.log(v);
       <Field id="stdin" className="title-input" placeholder="Inputs (seperated by an ' | ' symbol)" onChange={ handleChange }  
       />
     <Output showOutput={output}/> 
+  
 </div>
     )
 }
