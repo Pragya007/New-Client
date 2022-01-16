@@ -32,6 +32,11 @@ import { PageTrafficTable } from '../components/Tables';
 import QuizOverview from './documentation/QuizOverview';
 import BuildProject from './documentation/BuildProject';
 
+//Utility
+
+
+
+
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
 
@@ -39,9 +44,8 @@ const RouteWithLoader = ({ component: Component, ...rest }) => {
     const timer = setTimeout(() => setLoaded(true), 1000);
     return () => clearTimeout(timer);
   }, []);
-
-  return (
-    <Route {...rest} render={props => ( <> <Preloader show={loaded ? false : true} /> <Component {...props} /> </> ) } />
+ return (
+    <Route {...rest} render={props => (<> <Preloader show={loaded ? false : true} /> <Component {...props} /> </>)} />
   );
 };
 
@@ -50,10 +54,13 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 1000);
+
     return () => clearTimeout(timer);
+
   }, []);
 
   const localStorageIsSettingsVisible = () => {
+
     return localStorage.getItem('settingsVisible') === 'false' ? false : true
   }
 
@@ -64,26 +71,45 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
     localStorage.setItem('settingsVisible', !showSettings);
   }
 
-  return (
-    <Route {...rest} render={props => (
-      <>
-        <Preloader show={loaded ? false : true} />
-        <Sidebar />
+  if (localStorage.getItem('token')) {
+    return (
 
-        <main className="content">
-          <Navbar />
-          <Component {...props} />
-          <Footer toggleSettings={toggleSettings} showSettings={showSettings} />
-        </main>
-      </>
-    )}
-    />
-  );
+      <Route {...rest} render={props => (
+        <>
+          <Preloader show={loaded ? false : true} />
+          <Sidebar />
+
+          <main className="content">
+            <Navbar />
+            <Component {...props} />
+            <Footer toggleSettings={toggleSettings} showSettings={showSettings} />
+          </main>
+        </>
+      )}
+      />
+    );
+  }
+  else {
+    console.log("else chala")
+    return (<Redirect push to={'/'} />)
+  }
+
+
 };
 
 export default () => (
+
+
+
+
+
   <Switch>
+<<<<<<< Updated upstream
      <RouteWithLoader exact path={Routes.VM.path} component={VM} />
+=======
+    {/* <RouteWithLoader exact path={Routes.fullstack.path} component={fullstack} /> */}
+    <RouteWithLoader exact path={Routes.VM.path} component={VM} />
+>>>>>>> Stashed changes
     <RouteWithLoader exact path={Routes.Presentation.path} component={Signin} />
     <RouteWithLoader exact path={Routes.Signin.path} component={Signin} />
     <RouteWithLoader exact path={Routes.Signup.path} component={Signup} />
@@ -94,7 +120,9 @@ export default () => (
     <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
 
     {/* pages */}
+    <RouteWithSidebar exact path={Routes.fullstack.path} component={fullstack} />
     <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
+    {/* <PrivateRoute exact path={Routes.DashboardOverview.path}>  </PrivateRoute> */}
     <RouteWithSidebar exact path={Routes.Upgrade.path} component={Upgrade} />
     <RouteWithSidebar exact path={Routes.Transactions.path} component={Transactions} />
     <RouteWithSidebar exact path={Routes.Settings.path} component={Settings} />
