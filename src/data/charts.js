@@ -8,8 +8,7 @@ const trafficShares = [
 ];
 
 const totalOrders = [
-    { id: 1, label: "Open source Contribution", value: [1, 5, 2, 5, 4, 3], color: "primary" },
-    { id: 2, label: "Owned Projects", value: [2, 3, 4, 8, 1, 2], color: "secondary" }
+    { id: 1, value: [30, 67, 15, 97, 65, 55, 34], color: "primary" }
 ];
 
 export {

@@ -11,6 +11,7 @@ import BgImage from "../../assets/img/illustrations/signin.svg";
 import Axios from 'axios'
 import { useState } from "react";
 import { Redirect, Route, Switch } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 export default () => {
 
@@ -47,9 +48,10 @@ export default () => {
     })
   }
   if (loginstatus === 200) {
-    //  message = <h2>Successfully Logged in</h2>
+    let isAdmin = jwt_decode(localStorage.getItem("token")).admin;
+    localStorage.setItem("admin", isAdmin);
     message = <Switch>
-      <Redirect to={Routes.DashboardOverview.path} />
+      {!isAdmin? <Redirect to={Routes.DashboardOverview.path} />: <Redirect to={Routes.DashboardOverviewAdmin.path}/>}
     </Switch>
 
     return message;

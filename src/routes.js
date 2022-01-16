@@ -5,6 +5,7 @@ export const Routes = {
     fullstack:{path:'/assessment'},
     Presentation: { path: "/" },
     DashboardOverview: { path: "/dashboard/overview" },
+    DashboardOverviewAdmin: { path: "/admin/dashboard/overview" },
     Transactions: { path: "/challenges" },
     Settings: { path: "/settings" },
     Upgrade: { path: "/upgrade" },

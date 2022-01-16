@@ -11,11 +11,11 @@ import ItalyFlag from '../assets/img/flags/italy.svg';
 
 
 const pageVisits = [
-    { id: 1, views: 60, returnValue: 55, bounceRate: 42.55, pageName: "Java Full Stack" },
-    { id: 2, views: 70, returnValue: 39, bounceRate: -43.52, pageName: "Searching Algorithms" },
-    { id: 3, views: 65, returnValue: 45, bounceRate: -32.35, pageName: "Networking" },
-    { id: 4, views: 80, returnValue: 20, bounceRate: 15.78, pageName: "Operating System" },
-    { id: 5, views: 90, returnValue: 10, bounceRate: -75.12, pageName: "Problem solving in Javascript " }
+    { id: 1, views: "Akshat Verma", returnValue: 55, bounceRate: 42.55, pageName: "Java Full Stack", tca: 33.45 },
+    { id: 2, views: "Muskan Srivastava", returnValue: 39, bounceRate: -43.52, pageName: "Searching Algorithms", tca: 32.12 },
+    { id: 3, views: "Apurv Sirohi", returnValue: 45, bounceRate: -32.35, pageName: "Networking", tca: 12.33 },
+    { id: 4, views: "Taran Singh", returnValue: 20, bounceRate: 15.78, pageName: "Operating System", tca: 50.00 },
+    { id: 5, views: "Tiya Singh", returnValue: 10, bounceRate: -75.12, pageName: "Problem solving in Javascript ", tca: 65.89 }
 ];
 
 const pageTraffic = [

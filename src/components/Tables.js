@@ -28,19 +28,22 @@ const ValueChange = ({ value, suffix }) => {
 
 export const PageVisitsTable = () => {
   const TableRow = (props) => {
-    const { pageName, views, returnValue, bounceRate } = props;
+    const { pageName, views, returnValue, bounceRate, tca } = props;
     const bounceIcon = bounceRate < 0 ? faArrowDown : faArrowUp;
     const bounceTxtColor = bounceRate < 0 ? "text-danger" : "text-success";
 
     return (
       <tr>
         <th scope="row">{pageName}</th>
-        <td>{views}</td>
         <td>{returnValue}</td>
         <td>
           <FontAwesomeIcon icon={bounceIcon} className={`${bounceTxtColor} me-3`} />
           {Math.abs(bounceRate)}%
         </td>
+        <td>
+          {tca}
+        </td>
+        <td>{views}</td>
       </tr>
     );
   };
@@ -50,7 +53,7 @@ export const PageVisitsTable = () => {
       <Card.Header>
         <Row className="align-items-center">
           <Col>
-            <h5>Assessment Leaderboard</h5>
+            <h5>Assessments Overview</h5>
           </Col>
           <Col className="text-end">
             <Button variant="secondary" size="sm">See all</Button>
@@ -61,9 +64,10 @@ export const PageVisitsTable = () => {
         <thead className="thead-light">
           <tr>
             <th scope="col">Assessment Name</th>
-            <th scope="col">Score</th>
-            <th scope="col">Rank</th>
-            <th scope="col">Rank rate</th>
+            <th scope="col">Avg. Score</th>
+            <th scope="col">Participation</th>
+            <th scope="col">Avg. T.C.E</th>
+            <th scope="col">Assessment Topper</th>
           </tr>
         </thead>
         <tbody>

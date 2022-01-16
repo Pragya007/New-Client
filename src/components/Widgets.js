@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp, faChartArea, faChartBar, faChartLine, faFlagUsa, faFolderOpen, faGlobeEurope, faPaperclip, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { faAngular, faBootstrap, faReact, faVuejs } from "@fortawesome/free-brands-svg-icons";
@@ -127,32 +127,14 @@ export const CircleChartWidget = (props) => {
 };
 
 export const BarChartWidget = (props) => {
-  const { title, value, percentage, data = [] } = props;
-  const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const { title, percentage, data = [] } = props;
+  const labels = ['C', 'C++', 'C#', 'Java', 'Javascipt', 'Python', 'Ruby'];
   const series = data.map(d => d.value);
-  const percentageIcon = percentage < 0 ? faAngleDown : faAngleUp;
-  const percentageColor = percentage < 0 ? "text-danger" : "text-success";
-
   return (
     <Card border="light" className="shadow-sm">
       <Card.Body className="d-flex flex-row align-items-center flex-0 border-bottom">
         <div className="d-block">
           <h6 className="fw-normal text-gray mb-2">{title}</h6>
-          <h3>{value}</h3>
-          <small className="mt-2">
-            <FontAwesomeIcon icon={percentageIcon} className={`${percentageColor} me-1`} />
-            <span className={`${percentageColor} fw-bold`}>
-              {percentage}%
-            </span>
-          </small>
-        </div>
-        <div className="d-block ms-auto">
-          {data.map(d => (
-            <div key={`bar-element-${d.id}`} className="d-flex align-items-center text-end mb-2">
-              <span className={`shape-xs rounded-circle bg-${d.color} me-2`} />
-              <small className="fw-normal">{d.label}</small>
-            </div>
-          ))}
         </div>
       </Card.Body>
       <Card.Body className="p-2">
@@ -244,7 +226,7 @@ export const ProgressTrackWidget = () => {
   return (
     <Card border="light" className="shadow-sm">
       <Card.Header className="border-bottom border-light">
-        <h5 className="mb-0">Skil Progress track</h5>
+        <h5 className="mb-0">Projects Technology Overview</h5>
       </Card.Header>
       <Card.Body>
 
@@ -307,30 +289,101 @@ export const SalesValueWidget = (props) => {
   const { title, value, percentage } = props;
   const percentageIcon = percentage < 0 ? faAngleDown : faAngleUp;
   const percentageColor = percentage < 0 ? "text-danger" : "text-success";
+  const weekData = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    series: [[10, 20, 25, 35, 15, 5, 30]],
+    sum: 140,
+    percentage: 10.23
+  };
+  const monthData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Oct', 'Nov', 'Dec'],
+    series: [[10, 20, 25, 35, 15, 5, 30, 10, 20, 25, 35]],
+    sum: 230,
+    percentage: 5.6
+  };
+  const [week, setWeek] = useState(true);
+  const onClickMonthButton = () =>{
+    setWeek(false);
+  }
+  const onClickWeekButton = () =>{
+    setWeek(true);
+  }
 
   return (
     <Card className="bg-secondary-alt shadow-sm">
       <Card.Header className="d-flex flex-row align-items-center flex-0">
         <div className="d-block">
           <h5 className="fw-normal mb-2">
-            {title}
+          {week?"Weekly ":"Monthly "}{"Problem Solved"}
           </h5>
-          <h3>{value}</h3>
+          <h3>{week?weekData.sum:monthData.sum}</h3>
           <small className="fw-bold mt-2">
-            <span className="me-2">Yesterday</span>
+            <span className="me-2">{"Last "}{week?"Week":"Year"}</span>
             <FontAwesomeIcon icon={percentageIcon} className={`${percentageColor} me-1`} />
             <span className={percentageColor}>
-              {percentage}%
+              {week?weekData.percentage:monthData.percentage}%
             </span>
           </small>
         </div>
         <div className="d-flex ms-auto">
-          <Button variant="secondary" size="sm" className="me-2">Month</Button>
-          <Button variant="primary" size="sm" className="me-3">Week</Button>
+          <Button variant={week?"secondary":"primary"} size="sm" className="me-2" onClick={onClickMonthButton}>Month</Button>
+          <Button variant={week?"primary":"secondary"} size="sm" className="me-3" onClick={onClickWeekButton}>Week</Button>
         </div>
       </Card.Header>
       <Card.Body className="p-2">
-        <SalesValueChart />
+        <SalesValueChart data={week?weekData:monthData}/>
+      </Card.Body>
+    </Card>
+  );
+};
+
+export const ScoreWidget = (props) => {
+  const { percentage } = props;
+  const percentageIcon = percentage < 0 ? faAngleDown : faAngleUp;
+  const percentageColor = percentage < 0 ? "text-danger" : "text-success";
+  const weekData = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    series: [[10, 65, 25, 10, 15, 5, 30]],
+    sum: 67,
+    percentage: 6.68
+  };
+  const monthData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Oct', 'Nov', 'Dec'],
+    series: [[10, 21, 25, 10, 15, 5, 43, 10, 56, 25, 35]],
+    sum: 54,
+    percentage: 8.7
+  };
+  const [week, setWeek] = useState(true);
+  const onClickMonthButton = () =>{
+    setWeek(false);
+  }
+  const onClickWeekButton = () =>{
+    setWeek(true);
+  }
+
+  return (
+    <Card className="bg-primary-alt shadow-sm">
+      <Card.Header className="d-flex flex-row align-items-center flex-0">
+        <div className="d-block">
+          <h5 className="fw-normal mb-2">
+          {week?"Weekly ":"Monthly "}{"Assessment Average Score"}
+          </h5>
+          <h3>{week?weekData.sum:monthData.sum}</h3>
+          <small className="fw-bold mt-2">
+            <span className="me-2">{"Last "}{week?"Week":"Year"}</span>
+            <FontAwesomeIcon icon={percentageIcon} className={`${percentageColor} me-1`} />
+            <span className={percentageColor}>
+              {week?weekData.percentage:monthData.percentage}%
+            </span>
+          </small>
+        </div>
+        <div className="d-flex ms-auto">
+          <Button variant={week?"secondary":"primary"} size="sm" className="me-2" onClick={onClickMonthButton}>Month</Button>
+          <Button variant={week?"primary":"secondary"} size="sm" className="me-3" onClick={onClickWeekButton}>Week</Button>
+        </div>
+      </Card.Header>
+      <Card.Body className="p-2">
+        <SalesValueChart data={week?weekData:monthData}/>
       </Card.Body>
     </Card>
   );

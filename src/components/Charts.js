@@ -3,11 +3,8 @@ import React from "react";
 import Chartist from "react-chartist";
 import ChartistTooltip from 'chartist-plugin-tooltips-updated';
 
-export const SalesValueChart = () => {
-  const data = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    series: [[1, 2, 2, 3, 3, 4, 3]]
-  };
+export const SalesValueChart = (props) => {
+  const data = props.data;
 
   const options = {
     low: 0,

@@ -31,7 +31,9 @@ import VM from "../components/Vm";
 import { PageTrafficTable } from '../components/Tables';
 import QuizOverview from './documentation/QuizOverview';
 import BuildProject from './documentation/BuildProject';
-
+import DashboardOverviewAdmin from './dashboard/DashboardOverviewAdmin';
+import jwt_decode from "jwt-decode";
+import AdminSidebar from '../components/AdminSidebar';
 //Utility
 
 
@@ -97,6 +99,53 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
 
 };
 
+const RouteWithAdminSidebar = ({ component: Component, ...rest }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoaded(true), 1000);
+
+    return () => clearTimeout(timer);
+
+  }, []);
+
+  const localStorageIsSettingsVisible = () => {
+
+    return localStorage.getItem('settingsVisible') === 'false' ? false : true
+  }
+
+  const [showSettings, setShowSettings] = useState(localStorageIsSettingsVisible);
+
+  const toggleSettings = () => {
+    setShowSettings(!showSettings);
+    localStorage.setItem('settingsVisible', !showSettings);
+  }
+  if (jwt_decode(localStorage.getItem("token")).admin) {
+    return (
+
+      <Route {...rest} render={props => (
+        <>
+          <Preloader show={loaded ? false : true} />
+          <AdminSidebar />
+
+          <main className="content">
+            <Navbar />
+            <Component {...props} />
+            <Footer toggleSettings={toggleSettings} showSettings={showSettings} />
+          </main>
+        </>
+      )}
+      />
+    );
+  }
+  else {
+    console.log("else chala")
+    return (<Redirect push to={'/'} />)
+  }
+
+
+};
+
 export default () => (
 
 
@@ -118,6 +167,7 @@ export default () => (
     {/* pages */}
     {/* <RouteWithSidebar exact path={Routes.fullstack.path} component={fullstack} /> */}
     <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
+    <RouteWithAdminSidebar exact path={Routes.DashboardOverviewAdmin.path} component={DashboardOverviewAdmin} />
     {/* <PrivateRoute exact path={Routes.DashboardOverview.path}>  </PrivateRoute> */}
     <RouteWithSidebar exact path={Routes.Upgrade.path} component={Upgrade} />
     <RouteWithSidebar exact path={Routes.Transactions.path} component={Transactions} />
