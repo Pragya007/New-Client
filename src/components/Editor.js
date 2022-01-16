@@ -10,53 +10,53 @@ import DevelopmentUrl from "../constant";
 import Spinner from './Spinner';
 import Error from './Error';
 
-const plang = [
-  "c", "c99", "c++", "c++14", "c++17", "php", "perl", "python2", "python3",
-  "ruby",
-  "golang",
-  "scala",
-  "bashshell",
-  "sql",
-  "pascal",
-  "c#",
-  "vb.net",
-  "haskell",
-  "objectivec",
-  "swift",
-  "groovy",
-  "fortran",
-  "lua",
-  "tcl",
-  "hack",
-  "rust",
-  "d",
-  "ada",
-  "java",
-  "rlanguage",
-  "freebasic",
-
-  "verilog",
-  "cobol",
-  "dart",
-  "yabasic",
-  "clojure",
-  "nodejs",
-  "scheme",
-  "forth",
-  "prolog",
-  "octave",
-  "coffeescript",
-  "icon",
-  "f#",
-  "assemblernasm"]
 
 
 
 
 let token = localStorage.getItem('token');
 export const Editor = (props) => {
+  const plang = [
+    "c", "c99", "c++", "c++14", "c++17","php", "perl","python2","python3",
+    "ruby",
+     "golang",
+     "scala",
+     "bashshell",
+    "sql",
+    "pascal",
+    "c#",
+     "vb.net",
+    "haskell",
+     "objectivec",
+    "swift",
+    "groovy",
+    "fortran",
+    "lua",
+     "tcl",
+    "hack",
+    "rust",
+   "d",
+    "ada",
+    "java",
+    "rlanguage",
+   "freebasic",
+  
+     "verilog",
+    "cobol",
+    "dart",
+    "yabasic",
+     "clojure",
+     "nodejs",
+    "scheme",
+     "forth",
+    "prolog",
+     "octave",
+     "coffeescript",
+     "icon",
+     "f#",
+  "assemblernasm"]
 
-
+  let token = localStorage.getItem('token');
   const [selectedvalue, setSelectedvalue] = useState("c");
   const [inp, setinp] = useState();
   const [code, setcode] = useState();
