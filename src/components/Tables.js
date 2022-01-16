@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp, faArrowDown, faArrowUp, faEdit, faEllipsisH, faExternalLinkAlt, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { Col, Row, Nav, Card, Image, Button, Table, Dropdown, ProgressBar, Pagination, ButtonGroup } from '@themesberg/react-bootstrap';
+import { Col, Row, Nav, Card, Image, Button, Table, Dropdown, ProgressBar, Pagination, ButtonGroup, Spinner } from '@themesberg/react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { Routes } from "../routes";
@@ -87,13 +87,13 @@ export const PageTrafficTable = (props) => {
 
   const [state, setState] = useState([])
   const [quizid, setquizid] = useState([])
-  const setScoreFuncSec=(score, index)=>{
+  const setScoreFuncSec = (score, index) => {
     console.log(score)
-  sessionStorage.setItem("score"+index,score)
+    sessionStorage.setItem("score" + index, score)
   }
 
   useEffect(() => {
-    axios.get(DevelopmentUrl+'/quiz/javafullstack')
+    axios.get(DevelopmentUrl + '/quiz/javafullstack')
       .then(res => {
         setState(res.data[0].question);
         setquizid(res.data[0]._id);
@@ -109,15 +109,15 @@ export const PageTrafficTable = (props) => {
           <td>
             <Card.Link href="#" className="text-primary fw-bold">{index}</Card.Link>
           </td>
-          <td><Link to={{pathname:Routes.QuizQuestion.path + index + '/' + quizid + '/' + item._id, state:{func: {setScoreFuncSec}, index: index}} }><td>{item.title}</td></Link></td>
+          <td><Link to={{ pathname: Routes.QuizQuestion.path + index + '/' + quizid + '/' + item._id, state: { func: { setScoreFuncSec }, index: index } }}><td>{item.title}</td></Link></td>
           <td>
-            {!sessionStorage.getItem("score"+index)?0:sessionStorage.getItem("score"+index)}
+            {!sessionStorage.getItem("score" + index) ? 0 : sessionStorage.getItem("score" + index)}
           </td>
           <td>
             {Difficulty(item.difficulty)}
           </td>
           <td>
-            <Button as={Link} to={{pathname:Routes.QuizQuestion.path + index + '/' + quizid + '/' + item._id, state:{func: {setScoreFuncSec}, index: index}}} variant="secondary" className="m-1">Solve now</Button>
+            <Button as={Link} to={{ pathname: Routes.QuizQuestion.path + index + '/' + quizid + '/' + item._id, state: { func: { setScoreFuncSec }, index: index } }} variant="secondary" className="m-1">Solve now</Button>
           </td>
         </tr>))
     );
@@ -139,7 +139,7 @@ export const PageTrafficTable = (props) => {
             </tr>
           </thead>
           <tbody>
-            <TableRow props={props}/>
+            <TableRow props={props} />
           </tbody>
         </Table>
       </Card.Body>
@@ -147,23 +147,19 @@ export const PageTrafficTable = (props) => {
   );
 };
 
-
-
-
-
 export const Leaderboard = () => {
-
   const [state, setState] = useState([])
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
-    axios.get(DevelopmentUrl+'/quizresults/javaleaderboard')
+    setSpinner(true);
+    axios.get(DevelopmentUrl + '/quizresults/javaleaderboard')
       .then(res => {
-      console.log(res.data);
-      setState(res.data);
+        setState(res.data);
+        setSpinner(false);
       })
       .catch(err => console.error(err))
-
-  },[])
+  }, [])
 
   const TableRow = () => {
     return (
@@ -187,12 +183,14 @@ export const Leaderboard = () => {
           <td>
             <Card.Link href="#" className="text-primary fw-bold">{item[1].totalScore}</Card.Link>
           </td>
-        
-        </tr>))
+        </tr>
+        )
+        )
     );
   };
 
   return (
+    spinner?<Spinner/>:
     <Card border="light" className="shadow-sm mb-4">
       <Card.Body className="pb-0">
         <Table responsive className="table-centered table-nowrap rounded mb-0">
@@ -204,26 +202,16 @@ export const Leaderboard = () => {
               <th className="border-0">Q.2</th>
               <th className="border-0">Q.3</th>
               <th className="border-0">Total Score</th>
-              {/* <th className="border-0">Global Rank</th>
-              <th className="border-0">Traffic Share</th>
-              <th className="border-0">Change</th> */}
             </tr>
           </thead>
           <tbody>
-            <TableRow/>
+            <TableRow />
           </tbody>
         </Table>
       </Card.Body>
     </Card>
   );
 };
-
-
-
-
-
-
-
 
 export const RankingTable = () => {
   const TableRow = (props) => {
@@ -284,22 +272,22 @@ export const RankingTable = () => {
 };
 
 export const TransactionsTable = () => {
-  
+
   const totalTransactions = transactions.length;
 
   const TableRow = (props) => {
-    const[posts, setPosts]= useState({blogs:[]})
-useEffect (()=>{
-  const fetchPostList = async () =>{
-    const { data} =await axios(DevelopmentUrl+"/questions" )
+    const [posts, setPosts] = useState({ blogs: [] })
+    useEffect(() => {
+      const fetchPostList = async () => {
+        const { data } = await axios(DevelopmentUrl + "/questions")
 
-    setPosts({blogs:data})
-    console.log(data)
+        setPosts({ blogs: data })
+        console.log(data)
 
-  }
+      }
 
-  fetchPostList()
-},[setPosts])
+      fetchPostList()
+    }, [setPosts])
 
     const { invoiceNumber, subscription, price, issueDate, dueDate, status } = props;
     const statusVariant = status === "Paid" ? "success"
@@ -308,30 +296,30 @@ useEffect (()=>{
 
     return (
 
-      
-        posts.blogs && posts.blogs.map((item, index)=>(
-          <tr key={item._id}>
-        <td>
-          {index}
-        </td>
-        <td>
-          <span className="fw-normal">
-          <Link to={'/Question/'+item._id}><td>{item.title}</td></Link>
-          </span>
-        </td>
-        <td>
-          <span className="fw-normal">
-          <td>{Difficulty(item.difficulty)}</td>
-          </span>
-        </td>
-        <td>
-            <Button as={Link} to={'/Question/'+item._id} variant="secondary" className="m-1">Solve now</Button>
-          </td>
-      </tr>
-        ))
-      
 
-      
+      posts.blogs && posts.blogs.map((item, index) => (
+        <tr key={item._id}>
+          <td>
+            {index}
+          </td>
+          <td>
+            <span className="fw-normal">
+              <Link to={'/Question/' + item._id}><td>{item.title}</td></Link>
+            </span>
+          </td>
+          <td>
+            <span className="fw-normal">
+              <td>{Difficulty(item.difficulty)}</td>
+            </span>
+          </td>
+          <td>
+            <Button as={Link} to={'/Question/' + item._id} variant="secondary" className="m-1">Solve now</Button>
+          </td>
+        </tr>
+      ))
+
+
+
     );
   };
 

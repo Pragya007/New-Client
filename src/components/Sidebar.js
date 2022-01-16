@@ -107,9 +107,9 @@ export default (props = {}) => {
               <NavItem external title="Map" link="https://demo.themesberg.com/volt-pro-react/#/map" target="_blank" badgeText="Pro" icon={faMapPin} /> */}
 
               <CollapsableNavItem eventKey="tables/" title="Assessments" icon={faTable}>
-                <NavItem title="Java Full Stack" link={Routes.BootstrapTables.path} />
+                <NavItem title="Java Full Stack" link={Routes.QuizStartNow.path} />
               </CollapsableNavItem>
-              <NavItem title="Build Projects" icon={faCog} link={Routes.DocsLicense.path} />
+              <NavItem title="Build Projects" icon={faCog} link={Routes.BuildProject.path} />
               <NavItem title="Edit profile" icon={faCog} link={Routes.Settings.path} />
 
               {/* <CollapsableNavItem eventKey="examples/" title="Page Examples" icon={faFileAlt}>
@@ -132,8 +132,8 @@ export default (props = {}) => {
                 <NavItem title="Quick Start" link={Routes.DocsQuickStart.path} />
                 <NavItem title="License" link={Routes.DocsLicense.path} />
                 <NavItem title="Folder Structure" link={Routes.DocsFolderStructure.path} />
-                <NavItem title="Build Tools" link={Routes.DocsBuild.path} />
-                <NavItem title="Changelog" link={Routes.DocsChangelog.path} />
+                <NavItem title="Build Tools" link={Routes.QuestionPage.path} />
+                <NavItem title="Changelog" link={Routes.QuizQuestionPage.path} />
               </CollapsableNavItem> */}
               {/* <CollapsableNavItem eventKey="components/" title="Components" icon={faBoxOpen}>
                 <NavItem title="Accordion" link={Routes.Accordions.path} />

@@ -6,7 +6,7 @@ import Editor from '../../components/Editor';
 import DevelopmentUrl from "../../constant";
 
 
-const DocsBuild = (props) => {
+const QuestionPage = (props) => {
   const [quesdesc, setquesdesc] = useState("");
   const [questitle, setquestitle] = useState("");
   const [input, setinput] = useState();
@@ -55,4 +55,4 @@ const DocsBuild = (props) => {
   );
 }
 
-export default DocsBuild;
+export default QuestionPage;

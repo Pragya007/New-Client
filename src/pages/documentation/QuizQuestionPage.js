@@ -7,7 +7,7 @@ import DevelopmentUrl from "../../constant";
 import { Link, Redirect } from 'react-router-dom';
 import { Routes } from "../../routes";
 
-const DocsChangelog = (props) => {
+const QuizQuestionPage = (props) => {
   const [sss, setsss] = useState(false);
   const [quesdesc, setquesdesc] = useState("");
   const [questitle, setquestitle] = useState("");
@@ -89,12 +89,18 @@ const DocsChangelog = (props) => {
             </Card.Body>
           </Card>
         </Col>
-        <Col><div >{h}:{m}:{s}</div></Col>
       </Row>
+      <Row className="justify-content-between align-items-center">
+          <Col xs={8} md={6} lg={3} xl={4}>
+          </Col>
+          <Col xs={4} md={2} xl={1} className="ps-md-0 text-end">
+          <h3 >{h}:{m}:{s}</h3>
+          </Col>
+          </Row>
       <Editor setScoreFunc={setScoreFunc} />
-      {sss && <Redirect to={Routes.BootstrapTables.path} />}
+      {sss && <Redirect to={Routes.QuizStartNow.path} />}
     </Container>
   );
 }
 
-export default DocsChangelog;
+export default QuizQuestionPage;

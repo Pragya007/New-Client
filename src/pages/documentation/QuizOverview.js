@@ -2,21 +2,17 @@ import React, {useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { Breadcrumb, Button, Col, Row } from '@themesberg/react-bootstrap';
-import { Link, Redirect,useLocation,useHistory } from 'react-router-dom';
+import { Redirect,useHistory } from 'react-router-dom';
 
 import { Routes } from "../../routes";
 import { PageTrafficTable } from "../../components/Tables";
-import Timer from "../tables/Timer";
-import axios from 'axios';
-import DevelopmentUrl from "../.././constant";
+import DevelopmentUrl from "../../constant";
 
-import {Card, Container } from '@themesberg/react-bootstrap';
 
 
 export default () => {
   let history= useHistory();
   const [sss,setsss]=useState(false);
-  // const [counter, setcounter] = useState(sessionStorage.getItem("counter"));
   const [h, seth] = useState(sessionStorage.getItem("h"));
   const [m, setm] = useState(sessionStorage.getItem("m"));
   const [s, sets] = useState(sessionStorage.getItem("s"));
@@ -85,7 +81,7 @@ export default () => {
  userscore=v.AvgScore
  console.log(userscore);
  history.push({
-  pathname:Routes.BootstrapTables.path,
+  pathname:Routes.QuizStartNow.path,
   state:{from:userscore}
 })
 }
@@ -93,7 +89,7 @@ export default () => {
 
   return (
     <>
-    {sss && <Redirect to={Routes.BootstrapTables.path}/>}
+    {sss && <Redirect to={Routes.QuizStartNow.path}/>}
       <div className="d-xl-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div className="d-block mb-4 mb-xl-0">
           <Breadcrumb className="d-none d-md-inline-block" listProps={{ className: "breadcrumb-dark breadcrumb-transparent" }}>
@@ -106,8 +102,7 @@ export default () => {
           <h4>Java Full Stack </h4>
           </Col>
           <Col xs={4} md={2} xl={1} className="ps-md-0 text-end">
-          {/* <Timer/> */}
-          <div >{h}:{m}:{s}</div>
+          <h3 >{h}:{m}:{s}</h3>
           </Col>
           </Row>
           <h6>Instruction</h6>
@@ -119,8 +114,6 @@ export default () => {
       </div>
       
       <PageTrafficTable />
-      {/* <Button as={Link} to ={{ pathname: Routes.BootstrapTables.path, state: { from: userscore}}}  variant="success" className="m-1" onClick={submithandler}>Submit test</Button>
-       */}
       <Button type="link" className="m-1" onClick={submithandler}>Final Submit</Button>
       
       </>

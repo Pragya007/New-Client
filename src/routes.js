@@ -8,7 +8,7 @@ export const Routes = {
     Transactions: { path: "/transactions" },
     Settings: { path: "/settings" },
     Upgrade: { path: "/upgrade" },
-    BootstrapTables: { path: "/tables/bootstrap-tables" },
+    QuizStartNow: { path: "/tables/bootstrap-tables" },
     Billing: { path: "/examples/billing" },
     Invoice: { path: "/examples/invoice" },
     Signin: { path: "/sign-in" },
@@ -20,10 +20,10 @@ export const Routes = {
     ServerError: { path: "/examples/500" },
 
     // docs
-    DocsOverview: { path: "/documentation/overview" },
+    QuizOverview: { path: "/documentation/overview" },
     DocsDownload: { path: "/documentation/download" },
     DocsQuickStart: { path: "/documentation/quick-start" },
-    DocsLicense: { path: "/documentation/license" },
+    BuildProject: { path: "/documentation/license" },
     DocsFolderStructure: { path: "/documentation/folder-structure" },
     Question: { path: "/Question" },
     QuizQuestion: { path: "/Quiz/" },
