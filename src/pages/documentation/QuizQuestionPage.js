@@ -17,7 +17,6 @@ const QuizQuestionPage = (props) => {
   const [h, seth] = useState(sessionStorage.getItem("h"));
   const [m, setm] = useState(sessionStorage.getItem("m"));
   const [s, sets] = useState(sessionStorage.getItem("s"));
-   console.log(props)
 
    var index = window.location.href.substring(window.location.href.indexOf("Quiz/") + 5, window.location.href.indexOf("Quiz/") + 6);
   

@@ -88,7 +88,6 @@ export const PageTrafficTable = (props) => {
   const [state, setState] = useState([])
   const [quizid, setquizid] = useState([])
   const setScoreFuncSec = (score, index) => {
-    console.log(score)
     sessionStorage.setItem("score" + index, score)
   }
 
@@ -282,7 +281,6 @@ export const TransactionsTable = () => {
         const { data } = await axios(DevelopmentUrl + "/questions")
 
         setPosts({ blogs: data })
-        console.log(data)
 
       }
 

@@ -28,14 +28,8 @@ function QuizStartNow(props) {
           "Content-Type": "text/plain",
           "Authorization": `bearer ${token}`
         }
-        // }) .then(response => {
-        //   const c = (response.json())
-        //   console.log(c);
-        //   return response.json();
-        // }).catch(error => alert(error.message));
       })
       let v = await (response.json());
-      console.log(v)
       if (v.length != 0) {
         setallowed(v[0].attemptAllowed);
         setattempt(v[0].attemptFlag);

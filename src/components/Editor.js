@@ -54,7 +54,6 @@ const plang = [
 
 
 let token = localStorage.getItem('token');
-//console.log(token);
 export const Editor = (props) => {
 
 
@@ -70,24 +69,19 @@ export const Editor = (props) => {
 
   var v;
   function handleEditorChange(e) {
-    e.preventDefault();
     setcode(e);
-    console.log(e)
   }
 
   function handleChange(e) {
     setinp(e.target.value);
-    console.log(e.target.value);
   }
 
   const Drophandlechange = e => {
     setSelectedvalue(e.value);
-    console.log(selectedvalue);
 
   }
   const setoutputfunc = e => {
     setoutput(e);
-    console.log(output);
   }
   async function apiGet() {
     try{
@@ -107,9 +101,7 @@ export const Editor = (props) => {
   })
   const v = await(response.json());
   setoutputfunc(v.output);
-  setSpinner(false);
-  console.log(v.output)
-  console.log(v);}
+  setSpinner(false);}
   catch(e){
     setError(e.message);
     setSpinner(false);
@@ -138,11 +130,7 @@ console.log(code);
 v = await(response.json());
 setoutputfunc(v.output);
 setSpinner(false);
-props.setScoreFunc(v.score);
-
-//setSubmitOutputfunc(v.output);
-console.log(v.output)
-console.log(v);}
+props.setScoreFunc(v.score);}
 catch(e){
   setError(e.message);
   setSpinner(false);

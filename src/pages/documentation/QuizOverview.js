@@ -71,15 +71,9 @@ export default () => {
         "Content-Type": "text/plain",
         "Authorization": `bearer ${token}`
       }
-    // }) .then(response => {
-    //   const c = (response.json())
-    //   console.log(c);
-    //   return response.json();
-    // }).catch(error => alert(error.message));
   })
  let  v = await(response.json());
  userscore=v.AvgScore
- console.log(userscore);
  history.push({
   pathname:Routes.QuizStartNow.path,
   state:{from:userscore}

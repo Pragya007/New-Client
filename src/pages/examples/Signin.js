@@ -22,38 +22,29 @@ export default () => {
 
   let onchangeemailhandler = (event) => {
     setUsername(event.target.value);
-    console.log(username);
   }
   let onchangepasswordhandler = (event) => {
     setpass(event.target.value);
-    console.log(pass);
   }
 
 
   let submithandler =  (event) => {
     event.preventDefault();
-    //console.log("Enter into function");
     let formdata = {
       username: username,
       password: pass
     };
-    console.log(formdata)
-    //console.log(formdata);
      Axios.post(DevelopmentUrl+'/users/login', formdata).then(
       (res) => {
         let { token } = res.data;
         localStorage.setItem('token', token);
         setloginstatus(res.status);
        
-        console.log(token)
-       
       }
     ).catch(error => {
       console.log("error occured")
       console.log(error.data)
     })
-    console.log(formdata);
-    console.log(loginstatus);
   }
   if (loginstatus === 200) {
     //  message = <h2>Successfully Logged in</h2>
