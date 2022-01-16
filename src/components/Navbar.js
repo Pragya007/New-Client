@@ -9,17 +9,26 @@ import NOTIFICATIONS_DATA from "../data/notifications";
 import Profile3 from "../assets/img/team/profile-picture-3.jpg";
 import axios from "axios";
 import { Link, useHistory} from "react-router-dom";
-// import jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode";
+import Error from "./Error";
 
 
 export default (props) => {
   const [notifications, setNotifications] = useState(NOTIFICATIONS_DATA);
   const areNotificationsRead = notifications.reduce((acc, notif) => acc && notif.read, true);
+  const [error,setError]=useState("")
   let history= useHistory();
   let token =localStorage.getItem('token');
-  // if(token)
-  // { var decode =  jwt_decode(token);
-  // console.log(decode.name)}
+  
+  if(token)
+  { 
+    try{var decode =  jwt_decode(token);
+  console.log(decode.name)}
+ catch(e){
+   setError(e.message)
+ }
+
+}
  
   function logout()
   {
@@ -62,7 +71,8 @@ export default (props) => {
   };
 
   return (
-    <Navbar variant="dark" expanded className="ps-0 pe-2 pb-0">
+    error?<Error message={error}/>:
+    (<Navbar variant="dark" expanded className="ps-0 pe-2 pb-0">
       <Container fluid className="px-0">
         <div className="d-flex justify-content-between w-100">
           <div className="d-flex align-items-center">
@@ -102,11 +112,7 @@ export default (props) => {
                 <div className="media d-flex align-items-center">
                   <Image src={Profile3} className="user-avatar md-avatar rounded-circle" />
                   <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-<<<<<<< Updated upstream
-                    {/* <span className="mb-0 font-small fw-bold">{decode.name}</span> */}
-=======
                     <span className="mb-0 font-small fw-bold">{decode?decode.name:"Guest user"}</span>
->>>>>>> Stashed changes
                   </div>
                 </div>
               </Dropdown.Toggle>
@@ -134,6 +140,6 @@ export default (props) => {
           </Nav>
         </div>
       </Container>
-    </Navbar>
+    </Navbar>)
   );
 };

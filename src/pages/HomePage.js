@@ -104,12 +104,8 @@ export default () => (
 
 
   <Switch>
-<<<<<<< Updated upstream
-     <RouteWithLoader exact path={Routes.VM.path} component={VM} />
-=======
     {/* <RouteWithLoader exact path={Routes.fullstack.path} component={fullstack} /> */}
     <RouteWithLoader exact path={Routes.VM.path} component={VM} />
->>>>>>> Stashed changes
     <RouteWithLoader exact path={Routes.Presentation.path} component={Signin} />
     <RouteWithLoader exact path={Routes.Signin.path} component={Signin} />
     <RouteWithLoader exact path={Routes.Signup.path} component={Signup} />
@@ -120,7 +116,7 @@ export default () => (
     <RouteWithLoader exact path={Routes.ServerError.path} component={ServerError} />
 
     {/* pages */}
-    <RouteWithSidebar exact path={Routes.fullstack.path} component={fullstack} />
+    {/* <RouteWithSidebar exact path={Routes.fullstack.path} component={fullstack} /> */}
     <RouteWithSidebar exact path={Routes.DashboardOverview.path} component={DashboardOverview} />
     {/* <PrivateRoute exact path={Routes.DashboardOverview.path}>  </PrivateRoute> */}
     <RouteWithSidebar exact path={Routes.Upgrade.path} component={Upgrade} />
